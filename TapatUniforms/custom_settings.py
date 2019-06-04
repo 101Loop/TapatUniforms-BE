@@ -1,5 +1,14 @@
 import datetime
 
+CUSTOM_APPS = [
+    'drf_user',
+    'order',
+    'outlet',
+    'school',
+    'stock',
+    'product'
+]
+
 JWT_AUTH = {
     'JWT_ENCODE_HANDLER':
     'rest_framework_jwt.utils.jwt_encode_handler',
@@ -8,7 +17,7 @@ JWT_AUTH = {
     'rest_framework_jwt.utils.jwt_decode_handler',
 
     'JWT_PAYLOAD_HANDLER':
-    'drf_user.utils.jwt_payload_handler',
+    'drf_user.auth.jwt_payload_handler',
 
     'JWT_PAYLOAD_GET_USER_ID_HANDLER':
     'rest_framework_jwt.utils.jwt_get_user_id_from_payload_handler',
@@ -43,8 +52,18 @@ AUTHENTICATION_BACKENDS = [
 ]
 
 REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'drfaddons.auth.JSONWebTokenAuthenticationQS',
+    ),
+    'DEFAULT_RENDERER_CLASSES': (
+        'rest_framework.renderers.JSONRenderer',
+    ),
+    'DEFAULT_FILTER_BACKENDS': (
+        'drfaddons.filters.IsOwnerFilterBackend',
+        'django_filters.rest_framework.DjangoFilterBackend'
     ),
 }
 

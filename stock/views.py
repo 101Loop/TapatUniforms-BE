@@ -1,3 +1,10 @@
 from django.shortcuts import render
+from drfaddons import generics
 
-# Create your views here.
+
+class StockView(generics.OwnerListCreateAPIView):
+    from .models import Stock
+    from .serializers import StockSerializer
+
+    queryset = Stock.objects.all()
+    serializer_class = StockSerializer
