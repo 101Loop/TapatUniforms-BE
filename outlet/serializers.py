@@ -6,7 +6,7 @@ class OutletSerializer(serializers.ModelSerializer):
         from .models import Outlet
 
         model = Outlet
-        fields = ('id', 'name',)
+        fields = ('id', 'name')
         read_only_fields = fields
 
 

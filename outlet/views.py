@@ -1,10 +1,11 @@
-from django.shortcuts import render
-from drfaddons import generics
+from rest_framework import generics
+from rest_framework.permissions import AllowAny
 
 
-class OutletView(generics.GenericAPIView):
+class OutletView(generics.ListAPIView):
     from .models import Outlet
     from .serializers import OutletSerializer
 
+    permission_classes = (AllowAny, )
     queryset = Outlet.objects.all()
     serializer_class = OutletSerializer

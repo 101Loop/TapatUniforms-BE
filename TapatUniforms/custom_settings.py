@@ -2,6 +2,7 @@ import datetime
 
 CUSTOM_APPS = [
     'drf_user',
+    'drf_yasg',
     'order',
     'outlet',
     'school',
@@ -58,12 +59,16 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'drfaddons.auth.JSONWebTokenAuthenticationQS',
     ),
+
+    'DEFAULT_PARSER_CLASSES': (
+        'rest_framework.parsers.JSONParser',
+    ),
+
     'DEFAULT_RENDERER_CLASSES': (
         'rest_framework.renderers.JSONRenderer',
     ),
     'DEFAULT_FILTER_BACKENDS': (
-        'drfaddons.filters.IsOwnerFilterBackend',
-        'django_filters.rest_framework.DjangoFilterBackend'
+        'django_filters.rest_framework.DjangoFilterBackend',
     ),
 }
 

@@ -5,7 +5,7 @@ class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         from .models import CategoryMaster
 
-        models = CategoryMaster
+        model = CategoryMaster
         fields = ('id', 'name')
 
 

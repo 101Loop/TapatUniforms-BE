@@ -11,10 +11,8 @@ class Order(CreateUpdateModel):
     mobile = models.CharField(verbose_name=_("Buyer Mobile Number"),
                               max_length=15)
     email = models.CharField(verbose_name=_("Buyer Email"), max_length=500)
-
     discount = models.DecimalField(verbose_name=_("Discount Amount"),
                                    decimal_places=2, max_digits=10)
-
     outlet = models.ForeignKey(to=Outlet, verbose_name=_("Outlet"),
                                on_delete=models.PROTECT)
 
