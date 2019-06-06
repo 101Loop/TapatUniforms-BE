@@ -12,13 +12,25 @@ class Order(CreateUpdateModel):
                               max_length=15)
     email = models.CharField(verbose_name=_("Buyer Email"), max_length=500)
 
-    total = models.DecimalField(verbose_name=_("Total Amount"),
-                                decimal_places=2, max_digits=10)
     discount = models.DecimalField(verbose_name=_("Discount Amount"),
                                    decimal_places=2, max_digits=10)
 
     outlet = models.ForeignKey(to=Outlet, verbose_name=_("Outlet"),
                                on_delete=models.PROTECT)
+
+    @property
+    def payment_done(self):
+        total = 0
+        for x in self.transaction_set.all():
+            total += x.amount
+        return total >= self.total
+
+    @property
+    def total(self):
+        total = 0
+        for x in self.suborder_set.all():
+            total += x.total
+        return total
 
     def __str__(self):
         return self.name
@@ -37,3 +49,27 @@ class SubOrder(CreateUpdateModel):
                                 verbose_name=_("Outlet Product"))
     price = models.DecimalField(verbose_name=_("Price"), decimal_places=2,
                                 max_digits=10)
+    quantity = models.PositiveIntegerField(verbose_name=_("Quantity"))
+
+    @property
+    def total(self):
+        return self.price * self.quantity
+
+    def __str__(self):
+        return self.order.name
+
+    class Meta:
+        verbose_name = _("SubOrder")
+        verbose_name_plural = _("Sub Orders")
+
+
+class Transaction(CreateUpdateModel):
+    order = models.ForeignKey(to=Order, on_delete=models.PROTECT,
+                              verbose_name=_("Order"))
+    amount = models.DecimalField(verbose_name=_("Amount"), max_digits=10,
+                                 decimal_places=2)
+    mode = models.CharField(verbose_name=_("Mode of Payment"), max_length=254)
+
+    class Meta:
+        verbose_name = _("Transaction")
+        verbose_name_plural = _("Transactions")

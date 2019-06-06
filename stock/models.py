@@ -10,8 +10,7 @@ class Stock(CreateUpdateModel):
     outlet_product = models.ForeignKey(to=OutletProduct,
                                        verbose_name=_("Outlet Product"),
                                        on_delete=models.PROTECT)
-    quantity = models.PositiveIntegerField(verbose_name=_("Quantity"),
-                                           max_length=10)
+    quantity = models.PositiveIntegerField(verbose_name=_("Quantity"))
     location = models.CharField(verbose_name=_("Storage Location"),
                                 max_length=10)
 
