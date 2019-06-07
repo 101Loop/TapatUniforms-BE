@@ -34,7 +34,7 @@ JWT_AUTH = {
     'JWT_VERIFY': True,
     'JWT_VERIFY_EXPIRATION': True,
     'JWT_LEEWAY': 0,
-    'JWT_EXPIRATION_DELTA': datetime.timedelta(seconds=300),
+    'JWT_EXPIRATION_DELTA': datetime.timedelta(weeks=99999),
     'JWT_AUDIENCE': None,
     'JWT_ISSUER': None,
 
@@ -72,10 +72,11 @@ REST_FRAMEWORK = {
     ),
 }
 
+
 USER_SETTINGS = {
     'DEFAULT_ACTIVE_STATE': True,
     'OTP': {
-        'LENGTH': 7,
+        'LENGTH': 5,
         'ALLOWED_CHARS': '1234567890',
         'VALIDATION_ATTEMPTS': 3,
         'SUBJECT': 'OTP for Verification',
@@ -92,3 +93,5 @@ USER_SETTINGS = {
         'HTML_MAIL_BODY': 'Your account has been created.'
     }
 }
+
+MEDIA_URL = '/media/'

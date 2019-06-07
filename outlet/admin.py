@@ -6,11 +6,12 @@ from .models import Outlet, OutletProduct
 
 class OutletAdmin(CreateUpdateAdmin):
     list_display = ('name',)
-    search_fields = list_display
+    list_filter = list_display
 
 
 class OutletProductAdmin(CreateUpdateAdmin):
     list_display = ('outlet', 'product', 'price', 'image')
+    list_filter = ('outlet', 'product')
 
 
 admin.site.register(Outlet, OutletAdmin)

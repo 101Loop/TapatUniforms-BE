@@ -10,7 +10,7 @@ class CategoryAdmin(CreateUpdateAdmin):
 
 class ProductAdmin(CreateUpdateAdmin):
     list_display = ('name', 'sku')
-    search_fields = list_display
+    search_fields = ('name',)
 
 
 admin.site.register(CategoryMaster, CategoryAdmin)

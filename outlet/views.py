@@ -9,3 +9,12 @@ class OutletView(generics.ListAPIView):
     permission_classes = (AllowAny, )
     queryset = Outlet.objects.all()
     serializer_class = OutletSerializer
+
+
+class OutletProductView(generics.ListAPIView):
+    from .models import OutletProduct
+    from .serializers import OutletProductSerializer
+
+    permission_classes = (AllowAny,)
+    queryset = OutletProduct.objects.all()
+    serializer_class = OutletProductSerializer

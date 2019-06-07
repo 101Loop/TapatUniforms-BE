@@ -13,12 +13,11 @@ class OutletSerializer(serializers.ModelSerializer):
 class OutletProductSerializer(serializers.ModelSerializer):
     from product.serializers import ProductSerializer
 
-    outlet = OutletSerializer(many=False, read_only=True)
-    product = ProductSerializer(many=True, read_only=True)
+    product = ProductSerializer(many=False, read_only=True)
 
     class Meta:
         from .models import OutletProduct
 
         model = OutletProduct
-        fields = ('id', 'outlet', 'product')
+        fields = ('id', 'price', 'image', 'outlet', 'product')
         read_only_fields = fields
