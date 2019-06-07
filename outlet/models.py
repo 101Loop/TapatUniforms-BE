@@ -22,6 +22,9 @@ class OutletProduct(CreateUpdateModel):
                                on_delete=models.PROTECT)
     product = models.ForeignKey(to=Product, verbose_name=_("Product"),
                                 on_delete=models.PROTECT)
+    price = models.DecimalField(verbose_name=_("Price"), max_digits=10,
+                                decimal_places=3)
+    image = models.ImageField(verbose_name=_("Image"))
 
     def __str__(self):
         return "{}, {}".format(str(self.product), str(self.outlet))

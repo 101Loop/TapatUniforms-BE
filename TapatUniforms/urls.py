@@ -41,6 +41,7 @@ urlpatterns = [
     path('api/outlets/', include('outlet.urls', namespace='outlet')),
     path('api/product/', include('product.urls', namespace='product')),
     path('api/stock/', include('stock.urls', namespace='stock')),
+    path('api/school/', include('school.urls', namespace='school')),
 
     re_path(r'^swagger(?P<format>\.json|\.yaml)$',
             schema_view.without_ui(cache_timeout=0), name='schema-json'),

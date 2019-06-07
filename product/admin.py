@@ -1,23 +1,17 @@
 from django.contrib import admin
-
 from drfaddons.admin import CreateUpdateAdmin
+from .models import CategoryMaster, Product
 
-from .models import CategoryMaster, Product, ProductImage
 
-
-class ProductImageInline(admin.TabularInline):
-    model = ProductImage
-    extra = 1
+class CategoryAdmin(CreateUpdateAdmin):
+    list_display = ('name',)
+    search_fields = list_display
 
 
 class ProductAdmin(CreateUpdateAdmin):
-    fieldsets = (
-    )
-    inlines = [ProductImageInline, ]
-    list_display = ('name', 'price', 'sku')
-    list_filter = ('price', 'sku')
-    search_fields = ('name', 'sku')
+    list_display = ('name', 'sku')
+    search_fields = list_display
 
 
-admin.site.register(CategoryMaster)
+admin.site.register(CategoryMaster, CategoryAdmin)
 admin.site.register(Product, ProductAdmin)
