@@ -3,7 +3,6 @@ from django.utils.text import gettext_lazy as _
 from drfaddons.models import CreateUpdateModel
 
 from TapatUniforms.static_var import GENDER_CHOICES, MALE
-from TapatUniforms.static_var import PRODUCT_CHOICES
 
 
 class CategoryMaster(CreateUpdateModel):
@@ -22,8 +21,6 @@ class Product(CreateUpdateModel):
     name = models.CharField(verbose_name=_("Product"), max_length=254)
     sku = models.CharField(verbose_name=_("SKU Code"), max_length=254,
                            unique=True)
-    size = models.CharField(verbose_name=_("Size"), max_length=254,
-                            choices=PRODUCT_CHOICES)
     category = models.ForeignKey(to=CategoryMaster, on_delete=models.PROTECT)
     gender_type = models.CharField(verbose_name=_("Gender"),
                                    max_length=254, choices=GENDER_CHOICES,

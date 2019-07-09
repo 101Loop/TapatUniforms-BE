@@ -7,7 +7,7 @@ CUSTOM_APPS = [
     'outlet',
     'school',
     'stock',
-    'product'
+    'product',
 ]
 
 JWT_AUTH = {

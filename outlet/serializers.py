@@ -20,5 +20,5 @@ class OutletProductSerializer(serializers.ModelSerializer):
 
         model = OutletProduct
         fields = ('id', 'price', 'image', 'outlet', 'product', 'color',
-                  'color_code')
+                  'color_code', 'size', 'warehouse_stock', 'display_stock')
         read_only_fields = fields
