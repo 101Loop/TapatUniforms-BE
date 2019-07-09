@@ -1,13 +1,14 @@
 from django.db import models
 from django.utils.text import gettext_lazy as _
-
 from drfaddons.models import CreateUpdateModel
 
+from TapatUniforms.static_var import GENDER_CHOICES, MALE
 from TapatUniforms.static_var import PRODUCT_CHOICES
 
 
 class CategoryMaster(CreateUpdateModel):
     name = models.CharField(verbose_name=_("Category"), max_length=254)
+    image = models.ImageField(verbose_name=_("Image"), null=True)
 
     def __str__(self):
         return self.name
@@ -24,6 +25,9 @@ class Product(CreateUpdateModel):
     size = models.CharField(verbose_name=_("Size"), max_length=254,
                             choices=PRODUCT_CHOICES)
     category = models.ForeignKey(to=CategoryMaster, on_delete=models.PROTECT)
+    gender_type = models.CharField(verbose_name=_("Gender"),
+                                   max_length=254, choices=GENDER_CHOICES,
+                                   default=MALE)
 
     def __str__(self):
         return self.name

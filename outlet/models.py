@@ -25,6 +25,10 @@ class OutletProduct(CreateUpdateModel):
     price = models.DecimalField(verbose_name=_("Price"), max_digits=10,
                                 decimal_places=3)
     image = models.ImageField(verbose_name=_("Image"))
+    color = models.CharField(verbose_name=_("Color"), max_length=254,
+                             default=_("white"))
+    color_code = models.CharField(verbose_name=_("Color Code"),
+                                  max_length=254, default=_("#fff"))
 
     def __str__(self):
         return "{}, {}".format(str(self.product), str(self.outlet))
