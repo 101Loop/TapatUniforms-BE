@@ -1,7 +1,7 @@
 from django.contrib import admin
 from drfaddons.admin import CreateUpdateAdmin
 
-from .models import Order, SubOrder, Transaction
+from .models import Order, SubOrder, Transaction, Discount
 
 
 class TransactionInline(admin.TabularInline):
@@ -22,3 +22,4 @@ class OrderAdmin(CreateUpdateAdmin):
 
 
 admin.site.register(Order, OrderAdmin)
+admin.site.register(Discount)

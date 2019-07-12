@@ -23,3 +23,11 @@ class TransactionView(generics.OwnerCreateAPIView):
 
     queryset = Transaction.objects.all()
     serializer_class = TransactionSerializer
+
+
+class DiscountView(generics.OwnerListAPIView):
+    from order.models import Discount
+    from order.serializers import DiscountSerializer
+
+    queryset = Discount.objects.all()
+    serializer_class = DiscountSerializer

@@ -8,5 +8,6 @@ urlpatterns = [
     path('subOrder/', views.SubOrderView.as_view(),
          name='list-create-suborder'),
     path('transaction/', views.TransactionView.as_view(),
-         name='list-create-transaction')
+         name='list-create-transaction'),
+    path('discount/', views.DiscountView.as_view(), name='list-discounts')
 ]

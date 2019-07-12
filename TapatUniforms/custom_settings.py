@@ -8,6 +8,7 @@ CUSTOM_APPS = [
     'school',
     'stock',
     'product',
+    'stock_order'
 ]
 
 JWT_AUTH = {
