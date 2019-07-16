@@ -1,4 +1,5 @@
-from django.test import TestCase, Client
+from django.test import TestCase
+from rest_framework.test import APIClient
 from .models import CategoryMaster
 from .models import Product
 from drf_user.models import User
@@ -20,7 +21,6 @@ class Testing(TestCase):
                                              product_type="HS")
 
     def test_api(self):
-        print(self.product)
-        c = Client()
-        response = c.get('/api/categories/products/')
-        print(response)
+        client = APIClient()
+        response = client.get('/api/categories/products/')
+        assert response.status_code == 200

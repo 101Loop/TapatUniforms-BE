@@ -1,5 +1,5 @@
 from django.test import TestCase
-from django.test import Client
+from rest_framework.test import APIClient
 from .models import Outlet
 from .models import OutletProduct
 from product.models import Product, CategoryMaster
@@ -35,12 +35,8 @@ class OutletProductTest(TestCase):
             warehouse_stock=12, display_stock=12)
 
     def test_api(self):
-        print("Outlet product")
-        print(self.outProduct.product)
-
-        c = Client()
-        response = c.get('/api/outlets/products/', )
-        print('Status code is ->')
-        print(response.status_code)
+        client = APIClient()
+        response = client.get('/api/outlets/products/', )
+        assert response.status_code == 200
 
 
