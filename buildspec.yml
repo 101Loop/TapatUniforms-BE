@@ -5,7 +5,7 @@ phases:
   install:
     run-as: ubuntu
     runtime-versions:
-      python: 3.6
+      python: 3.7
     commands:
       - echo Install started on `date`
       - sudo apt-get install python3-pip
