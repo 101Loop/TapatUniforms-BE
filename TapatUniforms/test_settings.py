@@ -1,0 +1,1 @@
+from TapatUniforms.settings import *
