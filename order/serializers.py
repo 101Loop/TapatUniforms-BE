@@ -23,3 +23,11 @@ class TransactionSerializer(serializers.ModelSerializer):
 
         model = Transaction
         fields = ('order', 'amount', 'mode')
+
+
+class DiscountSerializer(serializers.ModelSerializer):
+    class Meta:
+        from .models import Discount
+
+        model = Discount
+        fields = ('id', 'product_quantity', 'discount_type', 'value')

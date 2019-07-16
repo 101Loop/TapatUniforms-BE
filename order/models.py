@@ -3,6 +3,26 @@ from django.utils.text import gettext_lazy as _
 
 from drfaddons.models import CreateUpdateModel
 
+from TapatUniforms.static_var import DISCOUNT_CHOICES
+
+
+class Discount(CreateUpdateModel):
+    product_quantity = models.IntegerField(verbose_name=_("Number of "
+                                                          "Items"))
+    discount_type = models.CharField(verbose_name=_("Discount "
+                                                    "Type"),
+                                     choices=DISCOUNT_CHOICES, max_length=3
+                                     , default='A')
+    value = models.IntegerField(verbose_name="Value", default=0
+                                )
+
+    def __str__(self):
+        return "Discount on {}".format(str(self.product_quantity), )
+
+    class Meta:
+        verbose_name = _("Discount")
+        verbose_name_plural = _("Discounts")
+
 
 class Order(CreateUpdateModel):
     from outlet.models import Outlet
@@ -11,8 +31,7 @@ class Order(CreateUpdateModel):
     mobile = models.CharField(verbose_name=_("Buyer Mobile Number"),
                               max_length=15)
     email = models.CharField(verbose_name=_("Buyer Email"), max_length=500)
-    discount = models.DecimalField(verbose_name=_("Discount Amount"),
-                                   decimal_places=2, max_digits=10)
+    discount = models.IntegerField(verbose_name=_("Discount"))
     outlet = models.ForeignKey(to=Outlet, verbose_name=_("Outlet"),
                                on_delete=models.PROTECT)
 
