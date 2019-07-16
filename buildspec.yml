@@ -1,9 +1,7 @@
 version: 0.2
-run-as: ubuntu
 
 phases:
   install:
-    run-as: ubuntu
     runtime-versions:
       python: 3.7
     commands:
@@ -12,12 +10,10 @@ phases:
       - sudo pip3 install virtualenv
       - virtualenv .venv
   pre_build:
-    run-as: ubuntu
     commands:
       - source .venv/bin/activate
       - pip install -r requirements.txt
   build:
-    run-as: ubuntu
     commands:
       - python manage.py migrate
 
