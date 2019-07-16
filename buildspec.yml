@@ -1,0 +1,23 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      python: 3.7
+    commands:
+      - apt-get install python3-pip
+      - pip3 install --upgrade pip
+      - pip3 install virtualenv
+      - virtualenv .venv
+  pre_build:
+    commands:
+      - . .venv/bin/activate
+      - pip install -r requirements.txt
+  build:
+    commands:
+      - python manage.py migrate
+
+artifacts:
+  files:
+    - db.sqlite3
+  name: database-$(date +%Y-%m-%d)
