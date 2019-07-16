@@ -5,9 +5,9 @@ phases:
     runtime-versions:
       python: 3.7
     commands:
-      - sudo apt-get install python3-pip
-      - sudo pip3 install --upgrade pip
-      - sudo pip3 install virtualenv
+      - apt-get install python3-pip
+      - pip3 install --upgrade pip
+      - pip3 install virtualenv
       - virtualenv .venv
   pre_build:
     commands:
