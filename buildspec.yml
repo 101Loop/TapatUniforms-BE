@@ -1,0 +1,33 @@
+version: 0.2
+run-as: ubuntu
+
+phases:
+  install:
+    run-as: ubuntu
+    runtime-versions:
+      python: 3.6
+    commands:
+      - echo Install started on `date`
+      - sudo apt-get install python3-pip
+      - sudo pip3 install --upgrade pip
+      - sudo pip3 install virtualenv
+      - virtualenv .venv
+      - echo Install completed on `date`
+  pre_build:
+    run-as: ubuntu
+    commands:
+      - echo Running pre-build on `date`
+      - source .venv/bin/activate
+      - pip install -r requirements.txt
+      - echo Pre-Build completed on `date`
+  build:
+    run-as: ubuntu
+    commands:
+      - echo Running build on `date`
+      - python manage.py migrate
+      - echo Build completed on `date`
+
+artifacts:
+  files:
+    - db.sqlite3
+  name: database-$(date +%Y-%m-%d)
