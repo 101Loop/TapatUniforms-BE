@@ -6,7 +6,7 @@ class SchoolSerializer(serializers.ModelSerializer):
         from .models import School
 
         model = School
-        fields = ('name', 'address', 'lat', 'longitude')
+        fields = ('name', 'address', 'latitude', 'longitude')
         read_only_fields = fields
 
 
