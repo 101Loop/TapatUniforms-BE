@@ -7,7 +7,7 @@ from drfaddons.models import CreateUpdateModel
 class School(CreateUpdateModel):
     name = models.CharField(verbose_name=_("School Name"), max_length=254)
     address = models.CharField(verbose_name=_("Full Address"), max_length=254)
-    lat = models.CharField(verbose_name=_("Latitude"), max_length=20)
+    latitude = models.CharField(verbose_name=_("Latitude"), max_length=20)
     longitude = models.CharField(verbose_name=_("Longitude"),
                                  max_length=20)
 
