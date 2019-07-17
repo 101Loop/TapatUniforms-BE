@@ -95,5 +95,3 @@ USER_SETTINGS = {
         'HTML_MAIL_BODY': 'Your account has been created.'
     }
 }
-
-MEDIA_URL = '/media/'
