@@ -7,12 +7,14 @@ from TapatUniforms.static_var import PRODUCT_CHOICES
 
 
 class Outlet(CreateUpdateModel):
-    name = models.CharField(verbose_name=_("Name"), max_length=254)
-    location = models.CharField(verbose_name=_("Location"), max_length=254)
+    from school.models import School
+
+    school = models.ForeignKey(verbose_name=_("School"), to=School,
+                               on_delete=False)
     short_name = models.CharField(verbose_name=_("Short Name"), max_length=254)
 
     def __str__(self):
-        return self.name
+        return self.school.name
 
     class Meta:
         verbose_name = _('Outlet')

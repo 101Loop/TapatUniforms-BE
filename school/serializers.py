@@ -16,4 +16,12 @@ class StudentSerializer(serializers.ModelSerializer):
 
         model = Student
         fields = ('student_id', 'name', 'school', 'email', 'mobile')
+
+
+class StudentReadOnlySerializer(serializers.ModelSerializer):
+    class Meta:
+        from .models import Student
+
+        model = Student
+        fields = ('student_id', 'name', 'school', 'email', 'mobile')
         read_only_fields = fields

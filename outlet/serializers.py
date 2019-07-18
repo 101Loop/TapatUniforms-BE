@@ -2,11 +2,15 @@ from rest_framework import serializers
 
 
 class OutletSerializer(serializers.ModelSerializer):
+    from school.serializers import SchoolSerializer
+
+    school = SchoolSerializer(many=False)
+
     class Meta:
         from .models import Outlet
 
         model = Outlet
-        fields = ('id', 'name', 'location', 'short_name')
+        fields = ('id', 'school', 'short_name')
         read_only_fields = fields
 
 

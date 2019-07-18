@@ -24,7 +24,7 @@ class StudentView(generics.OwnerCreateAPIView):
 
 class StudentRetrieveView(RetrieveAPIView):
     from .models import Student
-    from .serializers import StudentSerializer
+    from .serializers import StudentReadOnlySerializer
 
     queryset = Student.objects.all()
-    serializer_class = StudentSerializer
+    serializer_class = StudentReadOnlySerializer
