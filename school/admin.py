@@ -9,7 +9,7 @@ class SchoolAdmin(CreateUpdateAdmin):
 
 
 class StudentAdmin(CreateUpdateAdmin):
-    list_display = ('id_no', 'name', 'school')
+    list_display = ('student_id', 'name', 'school')
     search_fields = list_display
 
 
