@@ -15,7 +15,8 @@ class StudentSerializer(serializers.ModelSerializer):
         from .models import Student
 
         model = Student
-        fields = ('student_id', 'name', 'school', 'email', 'mobile')
+        fields = ('student_id', 'name', 'standard', 'section', 'father_name',
+                  'gender', 'school', 'email', 'mobile')
 
 
 class StudentReadOnlySerializer(serializers.ModelSerializer):
@@ -23,5 +24,6 @@ class StudentReadOnlySerializer(serializers.ModelSerializer):
         from .models import Student
 
         model = Student
-        fields = ('student_id', 'name', 'school', 'email', 'mobile')
+        fields = ('student_id', 'name', 'standard', 'section', 'father_name',
+                  'gender', 'school', 'email', 'mobile')
         read_only_fields = fields
