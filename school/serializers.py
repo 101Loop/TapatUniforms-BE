@@ -15,5 +15,5 @@ class StudentSerializer(serializers.ModelSerializer):
         from .models import Student
 
         model = Student
-        fields = ('id_no', 'name', 'school', 'email', 'mobile')
+        fields = ('student_id', 'name', 'school', 'email', 'mobile')
         read_only_fields = fields
