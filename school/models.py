@@ -20,7 +20,7 @@ class School(CreateUpdateModel):
 
 
 class Student(CreateUpdateModel):
-    id_no = models.CharField(verbose_name=_("ID Number"), max_length=100)
+    student_id = models.CharField(verbose_name=_("Student ID"), max_length=100)
     name = models.CharField(verbose_name=_("Name"), max_length=254)
     email = models.CharField(verbose_name=_("Email"), max_length=254)
     mobile = models.CharField(verbose_name=_("Contact no."), max_length=20)
@@ -31,6 +31,6 @@ class Student(CreateUpdateModel):
         return self.name
 
     class Meta:
-        unique_together = ('id_no', 'school')
+        unique_together = ('student_id', 'school')
         verbose_name = _('Student')
         verbose_name_plural = _('Students')

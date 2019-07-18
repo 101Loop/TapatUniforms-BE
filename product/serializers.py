@@ -10,6 +10,8 @@ class CategorySerializer(serializers.ModelSerializer):
 
 
 class ProductSerializer(serializers.ModelSerializer):
+    product_type = serializers.CharField(source='get_product_type_display')
+
     class Meta:
         from .models import Product
 

@@ -1,5 +1,7 @@
 from django_filters.rest_framework import DjangoFilterBackend
 from drfaddons import generics
+# ToDo: Fix Signature expired Issue
+from rest_framework.generics import RetrieveAPIView
 
 
 class SchoolView(generics.OwnerListAPIView):
@@ -12,11 +14,17 @@ class SchoolView(generics.OwnerListAPIView):
     filter_fields = ('id', 'name')
 
 
-class StudentView(generics.OwnerListAPIView):
+class StudentView(generics.OwnerCreateAPIView):
     from .models import Student
     from .serializers import StudentSerializer
 
     queryset = Student.objects.all()
     serializer_class = StudentSerializer
-    filter_backends = (DjangoFilterBackend,)
-    filter_fields = ('id', 'name', 'school')
+
+
+class StudentRetrieveView(RetrieveAPIView):
+    from .models import Student
+    from .serializers import StudentSerializer
+
+    queryset = Student.objects.all()
+    serializer_class = StudentSerializer
