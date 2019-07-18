@@ -5,7 +5,7 @@ from .models import Outlet, OutletProduct
 
 
 class OutletAdmin(CreateUpdateAdmin):
-    list_display = ('name',)
+    list_display = ('short_name', 'school',)
     list_filter = list_display
 
 
