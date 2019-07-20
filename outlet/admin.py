@@ -1,7 +1,7 @@
 from django.contrib import admin
 from drfaddons.admin import CreateUpdateAdmin
 
-from .models import Outlet, OutletProduct
+from .models import Outlet, OutletProduct, OutletSubProduct
 
 
 class OutletAdmin(CreateUpdateAdmin):
@@ -9,8 +9,14 @@ class OutletAdmin(CreateUpdateAdmin):
     list_filter = list_display
 
 
+class ProductInline(admin.TabularInline):
+    extra = 1
+    model = OutletSubProduct
+
+
 class OutletProductAdmin(CreateUpdateAdmin):
-    list_display = ('outlet', 'product', 'price', 'image')
+    inlines = (ProductInline, )
+    list_display = ('outlet', 'product', 'image')
     list_filter = ('outlet', 'product')
 
 

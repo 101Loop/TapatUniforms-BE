@@ -19,3 +19,4 @@ class OutletProductView(generics.ListAPIView):
     permission_classes = (IsStaff,)
     queryset = OutletProduct.objects.all()
     serializer_class = OutletProductSerializer
+
