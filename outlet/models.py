@@ -56,7 +56,7 @@ class OutletSubProduct(CreateUpdateModel):
                                         default=0)
 
     def __str__(self):
-        return self.outlet_product
+        return "{}".format(str(self.outlet_product))
 
     class Meta:
         verbose_name = _("Outlet SubProduct")
