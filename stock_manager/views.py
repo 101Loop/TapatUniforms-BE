@@ -20,29 +20,21 @@ class StockTransferView(views.APIView):
             size=request.data['size']
         )
         if outlet_sub_product:
-            if outlet_sub_product.warehouse_stock > int(request.data["item_count"]):
+            if outlet_sub_product.warehouse_stock >= int(request.data["item_count"]):
                 outlet_sub_product.warehouse_stock = outlet_sub_product.warehouse_stock - int(request.data["item_count"])
                 outlet_sub_product.display_stock = outlet_sub_product.display_stock + int(request.data["item_count"])
                 outlet_sub_product.save()
-
-                box_item = BoxItem.objects.all()
-                x = 0
                 item_left = int(request.data["item_count"])
-                print(box_item[0].num_of_item)
-                while item_left is not 0:
-                    print("here")
-                    if box_item[x].num_of_item >= item_left:
-                        print("here also")
-                        print(box_item[x].num_of_item)
-                        box_item[x].num_of_item = box_item[x].num_of_item - item_left
-                        item_left = 0
-                        print(box_item[x].num_of_item)
-                        box_item[x].save()
-                    else:
-                        item_left = item_left - box_item[x].num_of_item
-                        box_item[x].num_of_item = 0
-                        box_item[x].save()
-                        x = x+1
+                for box_item in BoxItem.objects.all():
+                    if box_item.product == outlet_sub_product:
+                        if box_item.num_of_item >= item_left:
+                            box_item.num_of_item = box_item.num_of_item - item_left
+                            box_item.save()
+                            break
+                        else:
+                            item_left = item_left - box_item.num_of_item
+                            box_item.num_of_item = 0
+                            box_item.save()
                 return Response({"success": "true"})
             else:
                 return Response({"Failure": "Shortage"})
