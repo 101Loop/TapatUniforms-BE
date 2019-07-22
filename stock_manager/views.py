@@ -36,7 +36,6 @@ class StockTransferView(views.APIView):
                             item_left = item_left - box_item.num_of_item
                             box_item.num_of_item = 0
                             box_item.save()
-         
 
                 return Response({"success": "true"})
             else:
