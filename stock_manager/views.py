@@ -1,8 +1,5 @@
-from django.shortcuts import render
 from rest_framework.generics import views
-from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
-
 from manager.permissions import IsStaff
 
 
@@ -29,15 +26,17 @@ class StockTransferView(views.APIView):
                 outlet_sub_product.save()
 
                 box_item = BoxItem.objects.all()
-                x = int(0)
+                x = 0
                 item_left = int(request.data["item_count"])
                 print(box_item[0].num_of_item)
                 while item_left is not 0:
                     print("here")
                     if box_item[x].num_of_item >= item_left:
                         print("here also")
+                        print(box_item[x].num_of_item)
                         box_item[x].num_of_item = box_item[x].num_of_item - item_left
                         item_left = 0
+                        print(box_item[x].num_of_item)
                         box_item[x].save()
                     else:
                         item_left = item_left - box_item[x].num_of_item
