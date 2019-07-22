@@ -38,4 +38,4 @@ class BoxItemSerializer(serializers.ModelSerializer):
         from .models import BoxItem
         model = BoxItem
         fields = ('id', 'product', 'num_of_item', 'item_scanned',
-                  'item_in_shelf', 'box')
+                  'box')
