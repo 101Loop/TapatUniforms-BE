@@ -23,7 +23,7 @@ class Outlet(CreateUpdateModel):
 
 class OutletProduct(CreateUpdateModel):
     from product.models import Product
-
+    name = models.CharField(verbose_name=_("Outlet Product Name"), max_length=255)
     outlet = models.ForeignKey(to=Outlet, verbose_name=_("Outlet"),
                                on_delete=models.PROTECT)
     product = models.ForeignKey(to=Product, verbose_name=_("Product"),
@@ -35,7 +35,7 @@ class OutletProduct(CreateUpdateModel):
                                   max_length=254, default=_("#fff"))
 
     def __str__(self):
-        return "{}, {}".format(str(self.product), str(self.outlet))
+        return "{}, {}".format(str(self.name), str(self.outlet))
 
     class Meta:
         unique_together = ('outlet', 'product')
@@ -56,7 +56,7 @@ class OutletSubProduct(CreateUpdateModel):
                                         default=0)
 
     def __str__(self):
-        return "{}".format(str(self.outlet_product))
+        return "{},{}".format(str(self.size), str(self.outlet_product))
 
     class Meta:
         verbose_name = _("Outlet SubProduct")

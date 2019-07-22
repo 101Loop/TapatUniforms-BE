@@ -9,7 +9,8 @@ CUSTOM_APPS = [
     'stock',
     'product',
     'stock_order',
-    'rest_framework.authtoken'
+    'rest_framework.authtoken',
+    'stock_manager'
 ]
 
 JWT_AUTH = {
