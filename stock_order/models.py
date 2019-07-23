@@ -78,6 +78,7 @@ class BoxItem(CreateUpdateModel):
     product = models.ForeignKey(to=OutletSubProduct, on_delete=models.PROTECT)
     num_of_item = models.IntegerField(verbose_name=_("Number of Items"))
     item_scanned = models.IntegerField(verbose_name=_("Item Scanned"))
+    item_in_shelf = models.IntegerField(verbose_name=_("Item in Shelf"), default=0)
     box = models.ForeignKey(to=Box, on_delete=models.PROTECT)
 
     def __str__(self):
