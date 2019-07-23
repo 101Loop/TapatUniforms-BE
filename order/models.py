@@ -58,11 +58,11 @@ class Order(CreateUpdateModel):
 
 
 class SubOrder(CreateUpdateModel):
-    from outlet.models import OutletProduct
+    from outlet.models import OutletSubProduct
 
     order = models.ForeignKey(to=Order, on_delete=models.PROTECT,
                               verbose_name=_("Order"))
-    product = models.ForeignKey(to=OutletProduct, on_delete=models.PROTECT,
+    product = models.ForeignKey(to=OutletSubProduct, on_delete=models.PROTECT,
                                 verbose_name=_("Outlet Product"))
     price = models.DecimalField(verbose_name=_("Price"), decimal_places=2,
                                 max_digits=10)

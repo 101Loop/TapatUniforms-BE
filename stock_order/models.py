@@ -16,14 +16,14 @@ class IndentRequest(CreateUpdateModel):
 
 
 class IndentRequestDetail(CreateUpdateModel):
-    from product.models import Product
-    product = models.ForeignKey(to=Product, on_delete=models.PROTECT)
+    from outlet.models import OutletSubProduct
+    product = models.ForeignKey(to=OutletSubProduct, on_delete=models.PROTECT)
     quantity = models.IntegerField(verbose_name=_("Quantity Required"))
     indent_request = models.ForeignKey(to=IndentRequest,
                                        on_delete=models.PROTECT)
 
     def __str__(self):
-        return self.product.name
+        return str(self.product)
 
     class Meta:
         verbose_name = _("Indent Request Detail")

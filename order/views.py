@@ -1,5 +1,5 @@
 from drfaddons import generics
-
+from rest_framework.response import Response
 from manager.permissions import IsStaff
 
 
@@ -12,11 +12,26 @@ class OrderView(generics.OwnerCreateAPIView):
 
 
 class SubOrderView(generics.OwnerCreateAPIView):
-    from .models import SubOrder
-    from .serializers import SubOrderSerializer
     permission_classes = (IsStaff,)
-    queryset = SubOrder.objects.all()
-    serializer_class = SubOrderSerializer
+
+    def post(self, request, *args, **kwargs):
+        print(request.data)
+        from order.models import SubOrder
+        from outlet.models import OutletSubProduct
+        from order.models import Order
+        order = Order.objects.get(pk=request.data["order"])
+        outletproduct = OutletSubProduct.objects.get(pk=request.data["product"])
+        if order and outletproduct and self.request.user:
+            suborder = SubOrder.objects.create(created_by=self.request.user, order=order, product=outletproduct,
+                                               price=request.data["price"], quantity=request.data["quantity"],
+                                               )
+            suborder.save()
+
+            outletproduct.display_stock = int(outletproduct.display_stock) - int(request.data["quantity"])
+            outletproduct.save()
+            return Response({"Success": "True"})
+        else:
+            return Response({"Failure": "False"})
 
 
 class TransactionView(generics.OwnerCreateAPIView):

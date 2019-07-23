@@ -9,12 +9,20 @@ class BoxItemInline(admin.TabularInline):
     model = BoxItem
 
 
+class IndentRequestDetailInline(admin.TabularInline):
+    extra = 1
+    model = IndentRequestDetail
+
+
+class IndentRequestDetailAdmin(CreateUpdateAdmin):
+    inlines = (IndentRequestDetailInline, )
+
+
 class BoxItemAdmin(CreateUpdateAdmin):
     inlines = (BoxItemInline, )
 
 
 admin.site.register(Indent)
-admin.site.register(IndentRequest)
-admin.site.register(IndentRequestDetail)
+admin.site.register(IndentRequest, IndentRequestDetailAdmin)
 admin.site.register(Box, BoxItemAdmin)
 
