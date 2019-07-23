@@ -9,15 +9,16 @@ class BoxItemInline(admin.TabularInline):
     model = BoxItem
 
 
+
 class IndentRequestDetailInline(admin.TabularInline):
     extra = 1
     model = IndentRequestDetail
 
-
+    
 class IndentRequestDetailAdmin(CreateUpdateAdmin):
     inlines = (IndentRequestDetailInline, )
 
-
+    
 class BoxItemAdmin(CreateUpdateAdmin):
     inlines = (BoxItemInline, )
 
