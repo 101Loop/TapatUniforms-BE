@@ -21,12 +21,11 @@ class SubOrderView(generics.OwnerCreateAPIView):
         from order.models import Order
         order = Order.objects.get(pk=request.data["order"])
         outletproduct = OutletSubProduct.objects.get(pk=request.data["product"])
+
         if order and outletproduct and self.request.user:
             suborder = SubOrder.objects.create(created_by=self.request.user, order=order, product=outletproduct,
-                                               price=request.data["price"], quantity=request.data["quantity"],
-                                               )
+                                               price=request.data["price"], quantity=request.data["quantity"],)
             suborder.save()
-
             outletproduct.display_stock = int(outletproduct.display_stock) - int(request.data["quantity"])
             outletproduct.save()
             return Response({"Success": "True"})
