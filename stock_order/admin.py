@@ -1,7 +1,7 @@
 from django.contrib import admin
 from drfaddons.admin import CreateUpdateAdmin
 
-from .models import IndentRequestDetail, IndentRequest, Indent, BoxItem, Box
+from .models import IndentRequest, Indent, BoxItem, Box
 
 
 class BoxItemInline(admin.TabularInline):
@@ -15,6 +15,5 @@ class BoxItemAdmin(CreateUpdateAdmin):
 
 admin.site.register(Indent)
 admin.site.register(IndentRequest)
-admin.site.register(IndentRequestDetail)
 admin.site.register(Box, BoxItemAdmin)
 

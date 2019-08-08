@@ -23,7 +23,9 @@ class Outlet(CreateUpdateModel):
 
 class OutletProduct(CreateUpdateModel):
     from product.models import Product
-    name = models.CharField(verbose_name=_("Outlet Product Name"), max_length=255)
+
+    name = models.CharField(verbose_name=_("Outlet Product Name"),
+                            max_length=255)
     outlet = models.ForeignKey(to=Outlet, verbose_name=_("Outlet"),
                                on_delete=models.PROTECT)
     product = models.ForeignKey(to=Product, verbose_name=_("Product"),
@@ -44,8 +46,8 @@ class OutletProduct(CreateUpdateModel):
 
 
 class OutletSubProduct(CreateUpdateModel):
-
-    outlet_product = models.ForeignKey(to=OutletProduct, on_delete=models.PROTECT)
+    outlet_product = models.ForeignKey(to=OutletProduct,
+                                       on_delete=models.PROTECT)
     size = models.CharField(verbose_name=_("Size"), max_length=4,
                             choices=PRODUCT_CHOICES, default='24')
     price = models.DecimalField(verbose_name=_("Price"), max_digits=10,

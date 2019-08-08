@@ -9,6 +9,7 @@ from manager.permissions import IsStaff
 class SchoolView(generics.OwnerListAPIView):
     from .models import School
     from .serializers import SchoolSerializer
+
     permission_classes = (IsStaff,)
     queryset = School.objects.all()
     serializer_class = SchoolSerializer
@@ -28,6 +29,7 @@ class StudentView(generics.OwnerCreateAPIView):
 class StudentRetrieveView(RetrieveAPIView):
     from .models import Student
     from .serializers import StudentReadOnlySerializer
+
     permission_classes = (IsStaff,)
     queryset = Student.objects.all()
     serializer_class = StudentReadOnlySerializer
