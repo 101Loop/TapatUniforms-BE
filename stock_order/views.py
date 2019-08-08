@@ -43,6 +43,10 @@ class BoxView(ListAPIView):
     queryset = Box.objects.all()
     serializer_class = BoxSerializer
 
+    def get(self, request, *args, **kwargs):
+        self.queryset = self.get_queryset().filter(pk=self.kwargs['pk'])
+        return super().get(request, *args, **kwargs)
+
 
 # ToDo: box Items linked to a school should be retrieved only by those user
 #  that are linked to the same school
@@ -58,5 +62,5 @@ class BoxItemView(ListAPIView):
     serializer_class = BoxItemSerializer
 
     def get(self, request, *args, **kwargs):
-        self.queryset = self.get_queryset().filter(pk=self.kwargs['pk'])
+        self.queryset = self.get_queryset().filter(box=self.kwargs['box'])
         return super().get(request, *args, **kwargs)
