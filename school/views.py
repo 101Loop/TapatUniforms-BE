@@ -1,7 +1,7 @@
 from django_filters.rest_framework import DjangoFilterBackend
 from drfaddons import generics
 # ToDo: Fix Signature expired Issue
-from rest_framework.generics import RetrieveAPIView
+from rest_framework.generics import RetrieveAPIView, ListAPIView
 
 from manager.permissions import IsStaff
 
@@ -17,7 +17,8 @@ class SchoolView(generics.OwnerListAPIView):
     filter_fields = ('id', 'name')
 
 
-class StudentView(generics.OwnerCreateAPIView):
+# ToDo: Only retrieve students linked to specific school
+class StudentView(ListAPIView):
     from .models import Student
     from .serializers import StudentSerializer
     

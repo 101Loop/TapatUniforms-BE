@@ -7,6 +7,6 @@ urlpatterns = [
     path('indent/', views.IndentView.as_view(), name="Indent"),
     path('indentRequest/', views.IndentRequestView.as_view(),
          name="Indent Request"),
-    path('box/<int:pk>/', views.BoxView.as_view(), name="Box"),
-    path('box/<int:pk>/items/', views.BoxItemView.as_view(), name="Box Items")
+    path('indent/<int:pk>/boxes/', views.BoxView.as_view(), name="Box"),
+    path('box/<int:box>/items/', views.BoxItemView.as_view(), name="Box Items")
 ]

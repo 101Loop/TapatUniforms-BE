@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models import Sum
 from django.utils.text import gettext_lazy as _
 from drfaddons.models import CreateUpdateModel
 
@@ -39,19 +40,19 @@ class Indent(CreateUpdateModel):
     shipped_on = models.DateTimeField(verbose_name=_("Shipped On"),
                                       null=False, blank=False)
     received_on = models.DateTimeField(verbose_name=_("Received On"),
-                                       blank=True)
+                                       blank=True, null=True)
 
     @property
     def num_of_boxes(self):
-        return len(self.box_set)
+        return self.box_set.count()
 
     @property
     def num_of_items(self):
         item_count = 0
-
-        for box in self.box_set:
-            item_count += len(box.boxitem_set)
-
+        
+        for box in self.box_set.all():
+            item_count += box.total_item
+        
         return item_count
 
     def __str__(self):
@@ -68,8 +69,11 @@ class Box(CreateUpdateModel):
     female_items = models.IntegerField(verbose_name=_("Number of female "
                                                       "Items"))
     male_items = models.IntegerField(verbose_name=_("Number of Male Items"))
-    total_item = models.IntegerField(verbose_name=_("Total Items"))
     indent = models.ForeignKey(to=Indent, on_delete=models.PROTECT)
+
+    @property
+    def total_item(self):
+        return self.boxitem_set.all().aggregate(noi=Sum('num_of_item'))['noi']
 
     def __str__(self):
         return self.name
@@ -83,8 +87,9 @@ class BoxItem(CreateUpdateModel):
     from outlet.models import OutletSubProduct
 
     product = models.ForeignKey(to=OutletSubProduct, on_delete=models.PROTECT)
-    num_of_item = models.IntegerField(verbose_name=_("Number of Items"))
-    item_scanned = models.IntegerField(verbose_name=_("Item Scanned"))
+    num_of_item = models.IntegerField(verbose_name=_("Quantity"))
+    item_scanned = models.IntegerField(verbose_name=_("Item Scanned"),
+                                       default=0)
     box = models.ForeignKey(to=Box, on_delete=models.PROTECT)
 
     def __str__(self):

@@ -33,9 +33,12 @@ class BoxSerializer(serializers.ModelSerializer):
 
 
 class BoxItemSerializer(serializers.ModelSerializer):
+    from outlet.serializers import OutletSubProductSerializer
+
+    product = OutletSubProductSerializer(many=False)
+
     class Meta:
         from .models import BoxItem
 
         model = BoxItem
-        fields = ('id', 'product', 'num_of_item', 'item_scanned',
-                  'box')
+        fields = ('id', 'product', 'num_of_item', 'item_scanned', 'box')
