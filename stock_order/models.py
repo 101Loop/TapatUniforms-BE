@@ -49,10 +49,10 @@ class Indent(CreateUpdateModel):
     @property
     def num_of_items(self):
         item_count = 0
-
+        
         for box in self.box_set.all():
             item_count += box.total_item
-
+        
         return item_count
 
     def __str__(self):

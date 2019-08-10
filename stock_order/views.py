@@ -47,7 +47,6 @@ class BoxView(ListAPIView):
         self.queryset = self.get_queryset().filter(pk=self.kwargs['pk'])
         return super().get(request, *args, **kwargs)
 
-
 # ToDo: box Items linked to a school should be retrieved only by those user
 #  that are linked to the same school
 class BoxItemView(ListAPIView):
