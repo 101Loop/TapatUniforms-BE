@@ -17,7 +17,8 @@ class SchoolView(generics.OwnerListAPIView):
     filter_fields = ('id', 'name')
 
 
-class StudentView(generics.OwnerCreateAPIView):
+# ToDo: Only retrieve students linked to specific school
+class StudentView(ListAPIView):
     from .models import Student
     from .serializers import StudentSerializer
     

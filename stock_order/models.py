@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models import Sum
 from django.utils.text import gettext_lazy as _
 from drfaddons.models import CreateUpdateModel
 
@@ -72,12 +73,7 @@ class Box(CreateUpdateModel):
 
     @property
     def total_item(self):
-        item_count = 0
-
-        for item in self.boxitem_set.all():
-            item_count += item.num_of_item
-
-        return item_count
+        return self.boxitem_set.all().aggregate(noi=Sum('num_of_item'))['noi']
 
     def __str__(self):
         return self.name
