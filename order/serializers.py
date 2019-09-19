@@ -6,7 +6,7 @@ class OrderSerializer(serializers.ModelSerializer):
         from .models import Order
 
         model = Order
-        fields = ('id', 'name', 'mobile', 'email', 'discount', 'outlet')
+        fields = ("id", "name", "mobile", "email", "discount", "outlet")
 
 
 class SubOrderSerializer(serializers.ModelSerializer):
@@ -14,7 +14,7 @@ class SubOrderSerializer(serializers.ModelSerializer):
         from .models import SubOrder
 
         model = SubOrder
-        fields = ('order', 'product', 'price', 'quantity', 'total')
+        fields = ("order", "product", "price", "quantity", "total")
 
 
 class TransactionSerializer(serializers.ModelSerializer):
@@ -22,7 +22,7 @@ class TransactionSerializer(serializers.ModelSerializer):
         from .models import Transaction
 
         model = Transaction
-        fields = ('order', 'amount', 'mode')
+        fields = ("order", "amount", "mode")
 
 
 class DiscountSerializer(serializers.ModelSerializer):
@@ -30,4 +30,4 @@ class DiscountSerializer(serializers.ModelSerializer):
         from .models import Discount
 
         model = Discount
-        fields = ('id', 'product_quantity', 'discount_type', 'value')
+        fields = ("id", "product_quantity", "discount_type", "value")

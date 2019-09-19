@@ -7,48 +7,56 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('school', '0004_auto_20190718_1241'),
-        ('product', '0001_initial'),
-        ('stock_order', '0004_auto_20190808_0635'),
+        ("school", "0004_auto_20190718_1241"),
+        ("product", "0001_initial"),
+        ("stock_order", "0004_auto_20190808_0635"),
     ]
 
     operations = [
         migrations.AlterModelOptions(
-            name='indentrequest',
-            options={'verbose_name': 'Indent Request Detail', 'verbose_name_plural': 'Indent Request Details'},
+            name="indentrequest",
+            options={
+                "verbose_name": "Indent Request Detail",
+                "verbose_name_plural": "Indent Request Details",
+            },
         ),
-        migrations.RemoveField(
-            model_name='indent',
-            name='indent_request',
-        ),
-        migrations.RemoveField(
-            model_name='indent',
-            name='shipping_to',
-        ),
+        migrations.RemoveField(model_name="indent", name="indent_request"),
+        migrations.RemoveField(model_name="indent", name="shipping_to"),
         migrations.AddField(
-            model_name='indent',
-            name='school',
-            field=models.ForeignKey(default=1, on_delete=django.db.models.deletion.PROTECT, to='school.School', verbose_name='School'),
+            model_name="indent",
+            name="school",
+            field=models.ForeignKey(
+                default=1,
+                on_delete=django.db.models.deletion.PROTECT,
+                to="school.School",
+                verbose_name="School",
+            ),
             preserve_default=False,
         ),
         migrations.AddField(
-            model_name='indentrequest',
-            name='product',
-            field=models.ForeignKey(default=1, on_delete=django.db.models.deletion.PROTECT, to='product.Product'),
+            model_name="indentrequest",
+            name="product",
+            field=models.ForeignKey(
+                default=1,
+                on_delete=django.db.models.deletion.PROTECT,
+                to="product.Product",
+            ),
             preserve_default=False,
         ),
         migrations.AddField(
-            model_name='indentrequest',
-            name='quantity',
-            field=models.IntegerField(default=1, verbose_name='Quantity Required'),
+            model_name="indentrequest",
+            name="quantity",
+            field=models.IntegerField(default=1, verbose_name="Quantity Required"),
             preserve_default=False,
         ),
         migrations.AlterField(
-            model_name='indentrequest',
-            name='school',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, to='school.School', verbose_name='School'),
+            model_name="indentrequest",
+            name="school",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.PROTECT,
+                to="school.School",
+                verbose_name="School",
+            ),
         ),
-        migrations.DeleteModel(
-            name='IndentRequestDetail',
-        ),
+        migrations.DeleteModel(name="IndentRequestDetail"),
     ]

@@ -6,16 +6,15 @@ class CategorySerializer(serializers.ModelSerializer):
         from .models import CategoryMaster
 
         model = CategoryMaster
-        fields = ('id', 'name', 'image')
+        fields = ("id", "name", "image")
 
 
 class ProductSerializer(serializers.ModelSerializer):
-    product_type = serializers.CharField(source='get_product_type_display')
+    product_type = serializers.CharField(source="get_product_type_display")
 
     class Meta:
         from .models import Product
 
         model = Product
-        fields = ('id', 'name', 'sku', 'category', 'gender_type',
-                  'product_type')
+        fields = ("id", "name", "sku", "category", "gender_type", "product_type")
         read_only_field = fields

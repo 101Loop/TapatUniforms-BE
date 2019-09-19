@@ -5,24 +5,17 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('school', '0003_auto_20190718_0907'),
-        ('outlet', '0001_initial'),
-    ]
+    dependencies = [("school", "0003_auto_20190718_0907"), ("outlet", "0001_initial")]
 
     operations = [
-        migrations.RemoveField(
-            model_name='outlet',
-            name='location',
-        ),
-        migrations.RemoveField(
-            model_name='outlet',
-            name='name',
-        ),
+        migrations.RemoveField(model_name="outlet", name="location"),
+        migrations.RemoveField(model_name="outlet", name="name"),
         migrations.AddField(
-            model_name='outlet',
-            name='school',
-            field=models.ForeignKey(default=1, on_delete=False, to='school.School', verbose_name='School'),
+            model_name="outlet",
+            name="school",
+            field=models.ForeignKey(
+                default=1, on_delete=False, to="school.School", verbose_name="School"
+            ),
             preserve_default=False,
         ),
     ]

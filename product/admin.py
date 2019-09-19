@@ -4,13 +4,13 @@ from .models import CategoryMaster, Product
 
 
 class CategoryAdmin(CreateUpdateAdmin):
-    list_display = ('name',)
+    list_display = ("name",)
     search_fields = list_display
 
 
 class ProductAdmin(CreateUpdateAdmin):
-    list_display = ('name', 'sku')
-    search_fields = ('name',)
+    list_display = ("name", "sku")
+    search_fields = ("name",)
 
 
 admin.site.register(CategoryMaster, CategoryAdmin)

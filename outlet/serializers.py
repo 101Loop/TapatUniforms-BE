@@ -10,7 +10,7 @@ class OutletSerializer(serializers.ModelSerializer):
         from .models import Outlet
 
         model = Outlet
-        fields = ('id', 'school', 'short_name')
+        fields = ("id", "school", "short_name")
         read_only_fields = fields
 
 
@@ -23,9 +23,7 @@ class LProductSerializer(serializers.ModelSerializer):
         from .models import OutletProduct
 
         model = OutletProduct
-        fields = (
-            'id', 'name', 'image', 'outlet', 'product',
-            'color', 'color_code')
+        fields = ("id", "name", "image", "outlet", "product", "color", "color_code")
 
 
 class OutletSubProductSerializer(serializers.ModelSerializer):
@@ -35,8 +33,7 @@ class OutletSubProductSerializer(serializers.ModelSerializer):
         from .models import OutletSubProduct
 
         model = OutletSubProduct
-        fields = ('outlet_product', 'size', 'price', 'warehouse_stock',
-                  'display_stock')
+        fields = ("outlet_product", "size", "price", "warehouse_stock", "display_stock")
 
 
 class OutletProductSerializer(serializers.ModelSerializer):
@@ -50,5 +47,12 @@ class OutletProductSerializer(serializers.ModelSerializer):
 
         model = OutletProduct
         fields = (
-            'id', 'name', 'outletsubproduct_set', 'image', 'outlet', 'product',
-            'color', 'color_code')
+            "id",
+            "name",
+            "outletsubproduct_set",
+            "image",
+            "outlet",
+            "product",
+            "color",
+            "color_code",
+        )

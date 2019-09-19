@@ -16,9 +16,9 @@ class SubOrderInline(admin.TabularInline):
 
 class OrderAdmin(CreateUpdateAdmin):
     inlines = [SubOrderInline, TransactionInline]
-    list_display = ('name', 'mobile', 'email', 'discount', 'outlet')
-    list_filter = ('name', 'mobile', 'email')
-    search_fields = ('name', 'mobile')
+    list_display = ("name", "mobile", "email", "discount", "outlet")
+    list_filter = ("name", "mobile", "email")
+    search_fields = ("name", "mobile")
 
 
 admin.site.register(Order, OrderAdmin)
