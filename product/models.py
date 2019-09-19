@@ -13,25 +13,28 @@ class CategoryMaster(CreateUpdateModel):
         return self.name
 
     class Meta:
-        verbose_name = _('Category')
-        verbose_name_plural = _('Categories')
+        verbose_name = _("Category")
+        verbose_name_plural = _("Categories")
 
 
 class Product(CreateUpdateModel):
     name = models.CharField(verbose_name=_("Product"), max_length=254)
-    sku = models.CharField(verbose_name=_("SKU Code"), max_length=254,
-                           unique=True)
+    sku = models.CharField(verbose_name=_("SKU Code"), max_length=254, unique=True)
     category = models.ForeignKey(to=CategoryMaster, on_delete=models.PROTECT)
-    gender_type = models.CharField(verbose_name=_("Gender"),
-                                   max_length=254, choices=GENDER_CHOICES,
-                                   default=MALE)
-    product_type = models.CharField(verbose_name=_("Product Type"),
-                                    choices=PRODUCT_TYPE_CHOICES,
-                                    max_length=3, blank=True, null=True)
+    gender_type = models.CharField(
+        verbose_name=_("Gender"), max_length=254, choices=GENDER_CHOICES, default=MALE
+    )
+    product_type = models.CharField(
+        verbose_name=_("Product Type"),
+        choices=PRODUCT_TYPE_CHOICES,
+        max_length=3,
+        blank=True,
+        null=True,
+    )
 
     def __str__(self):
         return self.name
 
     class Meta:
-        verbose_name = _('Product')
-        verbose_name_plural = _('Products')
+        verbose_name = _("Product")
+        verbose_name_plural = _("Products")

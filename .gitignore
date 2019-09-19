@@ -110,3 +110,11 @@ venv.bak/
 *.jpg
 *.png
 static
+
+# Virtualenv files
+/bin
+/lib
+/include
+
+# vscode
+.vscode

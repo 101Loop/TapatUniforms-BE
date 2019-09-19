@@ -4,12 +4,12 @@ from .models import School, Student
 
 
 class SchoolAdmin(CreateUpdateAdmin):
-    list_display = ('name', )
+    list_display = ("name",)
     search_fields = list_display
 
 
 class StudentAdmin(CreateUpdateAdmin):
-    list_display = ('student_id', 'name', 'school')
+    list_display = ("student_id", "name", "school")
     search_fields = list_display
 
 

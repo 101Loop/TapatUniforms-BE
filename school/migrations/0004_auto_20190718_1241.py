@@ -5,33 +5,38 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('school', '0003_auto_20190718_0907'),
-    ]
+    dependencies = [("school", "0003_auto_20190718_0907")]
 
     operations = [
         migrations.AddField(
-            model_name='student',
-            name='father_name',
-            field=models.CharField(default='', max_length=255, verbose_name="Father's Name"),
+            model_name="student",
+            name="father_name",
+            field=models.CharField(
+                default="", max_length=255, verbose_name="Father's Name"
+            ),
             preserve_default=False,
         ),
         migrations.AddField(
-            model_name='student',
-            name='gender',
-            field=models.CharField(choices=[('M', 'Male'), ('F', 'Female'), ('B', 'Both')], default='M', max_length=1, verbose_name='Geneder'),
+            model_name="student",
+            name="gender",
+            field=models.CharField(
+                choices=[("M", "Male"), ("F", "Female"), ("B", "Both")],
+                default="M",
+                max_length=1,
+                verbose_name="Geneder",
+            ),
             preserve_default=False,
         ),
         migrations.AddField(
-            model_name='student',
-            name='section',
-            field=models.CharField(default=1, max_length=5, verbose_name='Section'),
+            model_name="student",
+            name="section",
+            field=models.CharField(default=1, max_length=5, verbose_name="Section"),
             preserve_default=False,
         ),
         migrations.AddField(
-            model_name='student',
-            name='standard',
-            field=models.CharField(default=1, max_length=5, verbose_name='Class'),
+            model_name="student",
+            name="standard",
+            field=models.CharField(default=1, max_length=5, verbose_name="Class"),
             preserve_default=False,
         ),
     ]

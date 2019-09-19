@@ -10,9 +10,19 @@ class IndentSerializer(serializers.ModelSerializer):
         from .models import Indent
 
         model = Indent
-        fields = ('id', 'name', 'price', 'num_of_boxes', 'num_of_items',
-                  'shipping_from', 'shipping_from_lat', 'shipping_from_long',
-                  'school', 'shipped_on', 'received_on')
+        fields = (
+            "id",
+            "name",
+            "price",
+            "num_of_boxes",
+            "num_of_items",
+            "shipping_from",
+            "shipping_from_lat",
+            "shipping_from_long",
+            "school",
+            "shipped_on",
+            "received_on",
+        )
 
 
 class IndentRequestSerializer(serializers.ModelSerializer):
@@ -20,7 +30,7 @@ class IndentRequestSerializer(serializers.ModelSerializer):
         from .models import IndentRequest
 
         model = IndentRequest
-        fields = ('id', 'product', 'quantity', 'school')
+        fields = ("id", "product", "quantity", "school")
 
 
 class BoxSerializer(serializers.ModelSerializer):
@@ -28,8 +38,15 @@ class BoxSerializer(serializers.ModelSerializer):
         from .models import Box
 
         model = Box
-        fields = ('id', 'name', 'box_code', 'female_items', 'male_items',
-                  'total_item', 'indent')
+        fields = (
+            "id",
+            "name",
+            "box_code",
+            "female_items",
+            "male_items",
+            "total_item",
+            "indent",
+        )
 
 
 class BoxItemSerializer(serializers.ModelSerializer):
@@ -41,4 +58,4 @@ class BoxItemSerializer(serializers.ModelSerializer):
         from .models import BoxItem
 
         model = BoxItem
-        fields = ('id', 'product', 'num_of_item', 'item_scanned', 'box')
+        fields = ("id", "product", "num_of_item", "item_scanned", "box")

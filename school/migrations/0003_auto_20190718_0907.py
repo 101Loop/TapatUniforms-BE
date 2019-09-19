@@ -5,23 +5,19 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('school', '0002_auto_20190717_1006'),
-    ]
+    dependencies = [("school", "0002_auto_20190717_1006")]
 
     operations = [
         migrations.AddField(
-            model_name='student',
-            name='student_id',
-            field=models.CharField(default=1, max_length=100, verbose_name='Student ID'),
+            model_name="student",
+            name="student_id",
+            field=models.CharField(
+                default=1, max_length=100, verbose_name="Student ID"
+            ),
             preserve_default=False,
         ),
         migrations.AlterUniqueTogether(
-            name='student',
-            unique_together={('student_id', 'school')},
+            name="student", unique_together={("student_id", "school")}
         ),
-        migrations.RemoveField(
-            model_name='student',
-            name='id_no',
-        ),
+        migrations.RemoveField(model_name="student", name="id_no"),
     ]

@@ -9,45 +9,101 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-        migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-    ]
+    dependencies = [migrations.swappable_dependency(settings.AUTH_USER_MODEL)]
 
     operations = [
         migrations.CreateModel(
-            name='School',
+            name="School",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('create_date', models.DateTimeField(auto_now_add=True, verbose_name='Create Date/Time')),
-                ('update_date', models.DateTimeField(auto_now=True, verbose_name='Date/Time Modified')),
-                ('name', models.CharField(max_length=254, verbose_name='School Name')),
-                ('address', models.CharField(max_length=254, verbose_name='Full Address')),
-                ('lat', models.CharField(max_length=20, verbose_name='Latitude')),
-                ('longitude', models.CharField(max_length=20, verbose_name='Longitude')),
-                ('created_by', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, to=settings.AUTH_USER_MODEL)),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "create_date",
+                    models.DateTimeField(
+                        auto_now_add=True, verbose_name="Create Date/Time"
+                    ),
+                ),
+                (
+                    "update_date",
+                    models.DateTimeField(
+                        auto_now=True, verbose_name="Date/Time Modified"
+                    ),
+                ),
+                ("name", models.CharField(max_length=254, verbose_name="School Name")),
+                (
+                    "address",
+                    models.CharField(max_length=254, verbose_name="Full Address"),
+                ),
+                ("lat", models.CharField(max_length=20, verbose_name="Latitude")),
+                (
+                    "longitude",
+                    models.CharField(max_length=20, verbose_name="Longitude"),
+                ),
+                (
+                    "created_by",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.PROTECT,
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
             ],
-            options={
-                'verbose_name': 'School',
-                'verbose_name_plural': 'Schools',
-            },
+            options={"verbose_name": "School", "verbose_name_plural": "Schools"},
         ),
         migrations.CreateModel(
-            name='Student',
+            name="Student",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('create_date', models.DateTimeField(auto_now_add=True, verbose_name='Create Date/Time')),
-                ('update_date', models.DateTimeField(auto_now=True, verbose_name='Date/Time Modified')),
-                ('id_no', models.CharField(max_length=100, verbose_name='ID Number')),
-                ('name', models.CharField(max_length=254, verbose_name='Name')),
-                ('email', models.CharField(max_length=254, verbose_name='Email')),
-                ('mobile', models.CharField(max_length=20, verbose_name='Contact no.')),
-                ('created_by', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, to=settings.AUTH_USER_MODEL)),
-                ('school', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, to='school.School', verbose_name='School')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "create_date",
+                    models.DateTimeField(
+                        auto_now_add=True, verbose_name="Create Date/Time"
+                    ),
+                ),
+                (
+                    "update_date",
+                    models.DateTimeField(
+                        auto_now=True, verbose_name="Date/Time Modified"
+                    ),
+                ),
+                ("id_no", models.CharField(max_length=100, verbose_name="ID Number")),
+                ("name", models.CharField(max_length=254, verbose_name="Name")),
+                ("email", models.CharField(max_length=254, verbose_name="Email")),
+                ("mobile", models.CharField(max_length=20, verbose_name="Contact no.")),
+                (
+                    "created_by",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.PROTECT,
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
+                (
+                    "school",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.PROTECT,
+                        to="school.School",
+                        verbose_name="School",
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'Student',
-                'verbose_name_plural': 'Students',
-                'unique_together': {('id_no', 'school')},
+                "verbose_name": "Student",
+                "verbose_name_plural": "Students",
+                "unique_together": {("id_no", "school")},
             },
         ),
     ]
