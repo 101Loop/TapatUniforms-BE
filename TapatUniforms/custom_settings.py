@@ -4,6 +4,14 @@ import environ
 import sentry_sdk
 from sentry_sdk.integrations.django import DjangoIntegration
 
+
+# Sentry Integration
+sentry_sdk.init(
+    dsn=env("SENTRY_DSN"),
+    integrations=[DjangoIntegration()],
+    environment=env("SENTRY_ENV"),
+)
+
 env = environ.Env(
     # set casting, default value
     DEBUG=(bool, False)
@@ -15,10 +23,11 @@ environ.Env.read_env()
 DEBUG = env("DEBUG")
 
 # SECURITY WARNING: keep the secret key used in production secret!
-# Raises django's ImproperlyConfigured exception if SECRET_KEY not in os.environ
+# Raises django's ImproperlyConfigured exception if SECRET_KEY not in
+# os.environ
 SECRET_KEY = env("SECRET_KEY")
 
-ALLOWED_HOSTS = ["tapatapi.civilmachines.com"]
+ALLOWED_HOSTS = env.list("ALLOWED_HOSTS")
 
 CUSTOM_APPS = [
     "drf_user",
@@ -112,9 +121,3 @@ DATABASES = {
         "PORT": env("POSTGRES_PORT"),
     }
 }
-
-# Sentry Integration
-sentry_sdk.init(
-    dsn="https://5e0a7627fa97442cbe4efca603152e55@sentry.101loop.com/8",
-    integrations=[DjangoIntegration()],
-)
