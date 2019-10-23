@@ -22,5 +22,9 @@ class WareHouseAdmin(CreateUpdateAdmin):
     list_display = ()
 
 
+@admin.register(City)
+class CityAdmin(CreateUpdateAdmin):
+    list_display = ("id", "name")
+
+
 admin.site.register(State, StateAdmin)
-# admin.site.register(WareHouse)

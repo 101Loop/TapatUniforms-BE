@@ -12,9 +12,23 @@ PRODUCT_CHOICES = [
 
 MALE = "M"
 FEMALE = "F"
-BOTH = "B"
-GENDER_CHOICES = [(MALE, "Male"), (FEMALE, "Female"), (BOTH, "Both")]
-
+OTHER = "O"
+GENDER_CHOICES = [(MALE, "Male"), (FEMALE, "Female"), (OTHER, "Other")]
+CLASS_CHOICES = [
+    ("I", "I"),
+    ("II", "II"),
+    ("III", "III"),
+    ("IV", "IV"),
+    ("V", "V"),
+    ("VI", "VI"),
+    ("VII", "VII"),
+    ("VIII", "VIII"),
+    ("IX", "IX"),
+    ("X", "X"),
+    ("XI", "XI"),
+    ("XII", "XII"),
+]
+SECTION_CHOICES = [("A", "A"), ("B", "B"), ("C", "C"), ("D", "D")]
 HALFSLEEVES = "HS"
 FULLSLEEVES = "FS"
 HALFPANTS = "HP"

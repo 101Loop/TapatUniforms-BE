@@ -4,8 +4,9 @@ from .models import School, Student
 
 
 class SchoolAdmin(CreateUpdateAdmin):
-    list_display = ("name",)
+    list_display = ("id", "name", "city")
     search_fields = list_display
+    ordering = ("id",)
 
 
 class StudentAdmin(CreateUpdateAdmin):
