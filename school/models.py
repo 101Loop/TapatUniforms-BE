@@ -27,7 +27,7 @@ class Student(CreateUpdateModel):
     section = models.CharField(verbose_name=_("Section"), max_length=5)
     father_name = models.CharField(verbose_name=_("Father's Name"), max_length=255)
     gender = models.CharField(
-        verbose_name=_("Geneder"), choices=GENDER_CHOICES, max_length=1
+        verbose_name=_("Gender"), choices=GENDER_CHOICES, max_length=1
     )
     email = models.CharField(verbose_name=_("Email"), max_length=254)
     mobile = models.CharField(verbose_name=_("Contact no."), max_length=20)
