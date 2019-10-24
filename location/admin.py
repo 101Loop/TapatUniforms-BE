@@ -19,12 +19,17 @@ class StateAdmin(CreateUpdateAdmin):
 
 @admin.register(WareHouse)
 class WareHouseAdmin(CreateUpdateAdmin):
-    list_display = ()
+    list_display = ("id", "name", "city")
+    ordering = ("id",)
+    search_fields = ("name", "city")
+    list_filter = ("name", "city")
 
 
 @admin.register(City)
 class CityAdmin(CreateUpdateAdmin):
-    list_display = ("id", "name")
+    list_display = ("id", "name", "state")
+    list_filter = ["state__name"]
+    search_fields = ("name", "state__name")
 
 
 admin.site.register(State, StateAdmin)

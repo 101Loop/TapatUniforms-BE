@@ -28,6 +28,7 @@ class City(CreateUpdateModel):
     class Meta:
         verbose_name = _("City")
         verbose_name_plural = _("Cities")
+        unique_together = ("name", "state")
 
     def __str__(self):
         return "{} - {}".format(self.name, self.state)
@@ -37,6 +38,7 @@ class WareHouse(CreateUpdateModel):
     """ WareHouse Model : Will Represent the godown """
 
     name = models.CharField(verbose_name=_("WareHouse Name"), max_length=100)
+    address = models.TextField(verbose_name=_("WareHouse Address"), null=True)
     city = models.ForeignKey(
         to=City,
         on_delete=models.CASCADE,
@@ -47,6 +49,7 @@ class WareHouse(CreateUpdateModel):
     class Meta:
         verbose_name = _("Warehouse")
         verbose_name_plural = _("Warehouses")
+        unique_together = ("name", "city")
 
     def __str__(self):
-        return "{} - {}".format(self.city, self.name)
+        return "{} - {}".format(self.name, self.city)
