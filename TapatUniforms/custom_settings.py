@@ -4,6 +4,14 @@ import environ
 import sentry_sdk
 from sentry_sdk.integrations.django import DjangoIntegration
 
+
+# Sentry Integration
+sentry_sdk.init(
+    dsn=env("SENTRY_DSN"),
+    integrations=[DjangoIntegration()],
+    environment=env("SENTRY_ENV"),
+)
+
 env = environ.Env(
     # set casting, default value
     DEBUG=(bool, False)
