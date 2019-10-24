@@ -7,6 +7,7 @@ coreschema==0.0.4
 Django==2.2.2
 django-environ==0.4.5
 django-filter==2.0.0
+django-jet==1.0.8
 django-sendsms==0.3.1
 djangorestframework==3.9.4
 djangorestframework-jwt==1.11.0

@@ -43,6 +43,7 @@ schema_view = get_schema_view(
 )
 
 urlpatterns = [
+    re_path(r"^jet/", include("jet.urls", "jet")),
     path("api/user/", include("drf_user.urls", namespace="user")),
     path("api/order/", include("order.urls", namespace="order")),
     path("api/outlets/", include("outlet.urls", namespace="outlet")),
