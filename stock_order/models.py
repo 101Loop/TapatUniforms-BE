@@ -2,6 +2,7 @@ from django.db import models
 from django.db.models import Sum
 from django.utils.text import gettext_lazy as _
 from drfaddons.models import CreateUpdateModel
+from location.models import WareHouse
 
 
 class IndentRequest(CreateUpdateModel):
@@ -12,6 +13,15 @@ class IndentRequest(CreateUpdateModel):
     quantity = models.IntegerField(verbose_name=_("Quantity Required"))
     school = models.ForeignKey(
         verbose_name=_("School"), to=School, on_delete=models.PROTECT
+    )
+    requested_on = models.DateTimeField(
+        auto_now_add=True, verbose_name=_("Indent Requested On"), null=True
+    )
+    received_on = models.DateTimeField(
+        verbose_name=_("Indent Received On"),
+        blank=True,
+        null=True,
+        help_text="To update the admin, when the order is received",
     )
 
     def __str__(self):
@@ -25,25 +35,27 @@ class IndentRequest(CreateUpdateModel):
 class Indent(CreateUpdateModel):
     from school.models import School
 
-    name = models.CharField(verbose_name=_("Indent Name"), max_length=100)
+    indent_name = models.ForeignKey(
+        to=IndentRequest,
+        on_delete=models.CASCADE,
+        verbose_name=_("Indent Name"),
+        help_text="Name of the requested Indent",
+        null=True,
+    )
     price = models.DecimalField(
         verbose_name=_("Price"), decimal_places=2, max_digits=10
     )
-    shipping_from = models.CharField(verbose_name=_("Shipping From"), max_length=254)
-    shipping_from_lat = models.CharField(
-        verbose_name=_("Shipping from " "Latitude"), max_length=20
-    )
-    shipping_from_long = models.CharField(
-        verbose_name=_("Shipping from " "Longitude"), max_length=20
+    warehouse_name = models.ForeignKey(
+        to=WareHouse,
+        verbose_name=_("Shipping From"),
+        on_delete=models.CASCADE,
+        null=True,
     )
     school = models.ForeignKey(
-        verbose_name=_("School"), to=School, on_delete=models.PROTECT
+        verbose_name=_("School"), to=School, on_delete=models.CASCADE
     )
     shipped_on = models.DateTimeField(
-        verbose_name=_("Shipped On"), null=False, blank=False
-    )
-    received_on = models.DateTimeField(
-        verbose_name=_("Received On"), blank=True, null=True
+        auto_now_add=True, verbose_name=_("Shipped On"), null=False, blank=False
     )
 
     @property
@@ -60,7 +72,7 @@ class Indent(CreateUpdateModel):
         return item_count
 
     def __str__(self):
-        return self.name
+        return self.indent_name
 
     class Meta:
         verbose_name = _("Indent")

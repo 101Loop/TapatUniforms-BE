@@ -6,7 +6,7 @@ class SchoolSerializer(serializers.ModelSerializer):
         from .models import School
 
         model = School
-        fields = ("id", "name", "address", "latitude", "longitude")
+        fields = ("id", "name", "address", "city")
         read_only_fields = fields
 
 
@@ -20,11 +20,11 @@ class StudentSerializer(serializers.ModelSerializer):
             "name",
             "standard",
             "section",
-            "father_name",
             "gender",
-            "school",
+            "father_name",
             "email",
             "mobile",
+            "school",
         )
 
 
