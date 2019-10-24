@@ -2,7 +2,7 @@ from django.db import models
 from django.utils.text import gettext_lazy as _
 
 from drfaddons.models import CreateUpdateModel
-
+from django.core.validators import MinValueValidator
 from TapatUniforms.static_var import DISCOUNT_CHOICES
 
 
@@ -14,7 +14,9 @@ class Discount(CreateUpdateModel):
         max_length=3,
         default="A",
     )
-    value = models.IntegerField(verbose_name="Value", default=0)
+    value = models.IntegerField(
+        verbose_name="Value", default=0.00, validators=[MinValueValidator(0.00)]
+    )
 
     def __str__(self):
         return "Discount on {}".format(str(self.product_quantity))
@@ -30,7 +32,7 @@ class Order(CreateUpdateModel):
     name = models.CharField(verbose_name=_("Buyer Name"), max_length=254)
     mobile = models.CharField(verbose_name=_("Buyer Mobile Number"), max_length=15)
     email = models.CharField(verbose_name=_("Buyer Email"), max_length=500)
-    discount = models.IntegerField(verbose_name=_("Discount"))
+    discount = models.PositiveIntegerField(verbose_name=_("Discount"))
     outlet = models.ForeignKey(
         to=Outlet, verbose_name=_("Outlet"), on_delete=models.PROTECT
     )
@@ -67,7 +69,11 @@ class SubOrder(CreateUpdateModel):
         to=OutletProduct, on_delete=models.PROTECT, verbose_name=_("Outlet Product")
     )
     price = models.DecimalField(
-        verbose_name=_("Price"), decimal_places=2, max_digits=10
+        verbose_name=_("Price"),
+        default=0.00,
+        decimal_places=2,
+        max_digits=10,
+        validators=[MinValueValidator(0.00)],
     )
     quantity = models.PositiveIntegerField(verbose_name=_("Quantity"))
 
@@ -88,7 +94,10 @@ class Transaction(CreateUpdateModel):
         to=Order, on_delete=models.PROTECT, verbose_name=_("Order")
     )
     amount = models.DecimalField(
-        verbose_name=_("Amount"), max_digits=10, decimal_places=2
+        verbose_name=_("Amount"),
+        max_digits=10,
+        decimal_places=2,
+        validators=[MinValueValidator(0.00)],
     )
     mode = models.CharField(verbose_name=_("Mode of Payment"), max_length=254)
 
