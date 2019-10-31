@@ -22,9 +22,9 @@ from drf_yasg.views import get_schema_view
 from rest_framework import permissions
 
 # default: "Django Administration"
-admin.site.site_header = "Tapat Uniform Administration"
+admin.site.site_header = "Uniparels Administration"
 # default: "Site administration"
-admin.site.index_title = "Tapat Uniform"
+admin.site.index_title = "Uniparels"
 # default: "Django site admin"
 admin.site.site_title = "Administration"
 

@@ -26,7 +26,7 @@ class IndentRequestSerializer(serializers.ModelSerializer):
         from .models import IndentRequest
 
         model = IndentRequest
-        fields = ("id", "product", "quantity", "school")
+        fields = ("id", "product", "quantity", "school", "requested_on", "received_on")
 
 
 class BoxSerializer(serializers.ModelSerializer):

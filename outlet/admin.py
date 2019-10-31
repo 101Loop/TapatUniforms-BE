@@ -7,10 +7,11 @@ from .models import Outlet, OutletProduct, OutletSubProduct
 class OutletAdmin(CreateUpdateAdmin):
     list_display = ("id", "short_name", "school")
     list_filter = list_display
+    ordering = ["id"]
 
 
 class ProductInline(CreateUpdateExcludeInlineAdminMixin, admin.TabularInline):
-    extra = 1
+    extra = 0
     model = OutletSubProduct
 
 
