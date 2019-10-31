@@ -59,6 +59,10 @@ class Indent(CreateUpdateModel):
     )
 
     @property
+    def indent(self):
+        return self.indent_name.product.name
+
+    @property
     def num_of_boxes(self):
         return self.box_set.count()
 

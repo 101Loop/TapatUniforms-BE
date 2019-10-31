@@ -12,7 +12,7 @@ class IndentSerializer(serializers.ModelSerializer):
         model = Indent
         fields = (
             "id",
-            "indent_name",
+            "indent",
             "price",
             "num_of_boxes",
             "num_of_items",

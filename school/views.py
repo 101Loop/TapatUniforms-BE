@@ -27,6 +27,9 @@ class StudentView(ListCreateAPIView):
     queryset = Student.objects.all()
     serializer_class = StudentSerializer
 
+    def perform_create(self, serializer):
+        serializer.save(created_by_id=self.request.user.id)
+
 
 class StudentRetrieveView(RetrieveAPIView):
     from .models import Student
