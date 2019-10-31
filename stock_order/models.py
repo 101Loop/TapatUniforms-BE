@@ -72,7 +72,7 @@ class Indent(CreateUpdateModel):
         return item_count
 
     def __str__(self):
-        return self.indent_name
+        return self.indent_name.product.name
 
     class Meta:
         verbose_name = _("Indent")

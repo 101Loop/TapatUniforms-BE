@@ -19,6 +19,10 @@ class School(CreateUpdateModel):
     # latitude = models.CharField(verbose_name=_("Latitude"), max_length=20)
     # longitude = models.CharField(verbose_name=_("Longitude"), max_length=20)
 
+    @property
+    def city_name(self):
+        return self.city.city.name
+
     def __str__(self):
         return self.name
 
