@@ -1,7 +1,7 @@
 from drfaddons import generics
 from rest_framework.generics import ListAPIView
 
-from manager.permissions import IsStaff
+from manager.permissions import IsManager
 
 
 class IndentRequestView(generics.OwnerCreateAPIView):
@@ -12,7 +12,7 @@ class IndentRequestView(generics.OwnerCreateAPIView):
     from .models import IndentRequest
     from .serializers import IndentRequestSerializer
 
-    permission_classes = (IsStaff,)
+    permission_classes = (IsManager,)
     queryset = IndentRequest.objects.all()
     serializer_class = IndentRequestSerializer
 
@@ -27,7 +27,7 @@ class IndentView(ListAPIView):
     from .models import Indent
     from .serializers import IndentSerializer
 
-    permission_classes = (IsStaff,)
+    permission_classes = (IsManager,)
     queryset = Indent.objects.all()
     serializer_class = IndentSerializer
 
@@ -42,7 +42,7 @@ class BoxView(ListAPIView):
     from .models import Box
     from .serializers import BoxSerializer
 
-    permission_classes = (IsStaff,)
+    permission_classes = (IsManager,)
     queryset = Box.objects.all()
     serializer_class = BoxSerializer
 
@@ -61,7 +61,7 @@ class BoxItemView(ListAPIView):
     from .models import BoxItem
     from .serializers import BoxItemSerializer
 
-    permission_classes = (IsStaff,)
+    permission_classes = (IsManager,)
     queryset = BoxItem.objects.all()
     serializer_class = BoxItemSerializer
 

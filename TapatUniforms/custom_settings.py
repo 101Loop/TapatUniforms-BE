@@ -38,7 +38,7 @@ CUSTOM_APPS = [
     "product",
     "stock_order",
     "location",
-    "guardian",  # django-guardian - per object permissions for Django
+    "manager",
     "rest_framework.authtoken",
 ]
 
@@ -67,10 +67,7 @@ JWT_AUTH = {
 
 AUTH_USER_MODEL = "drf_user.User"
 
-AUTHENTICATION_BACKENDS = (
-    "drf_user.auth.MultiFieldModelBackend",
-    "guardian.backends.ObjectPermissionBackend",
-)
+AUTHENTICATION_BACKENDS = ("drf_user.auth.MultiFieldModelBackend",)
 
 REST_FRAMEWORK = {
     "DEFAULT_PERMISSION_CLASSES": ("rest_framework.permissions.IsAuthenticated",),

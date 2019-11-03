@@ -21,7 +21,7 @@ class School(CreateUpdateModel):
 
     @property
     def city_name(self):
-        return self.city.city.name
+        return self.city.name
 
     def __str__(self):
         return self.name
