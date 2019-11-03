@@ -1,6 +1,5 @@
 from django.db import models
 from django.utils.text import gettext_lazy as _
-
 from drfaddons.models import CreateUpdateModel
 
 from TapatUniforms.static_var import PRODUCT_CHOICES
@@ -9,7 +8,9 @@ from TapatUniforms.static_var import PRODUCT_CHOICES
 class Outlet(CreateUpdateModel):
     from school.models import School
 
-    school = models.ForeignKey(verbose_name=_("School"), to=School, on_delete=False)
+    school = models.OneToOneField(
+        verbose_name=_("School"), to=School, on_delete=models.PROTECT
+    )
     short_name = models.CharField(verbose_name=_("Short Name"), max_length=254)
 
     def __str__(self):
