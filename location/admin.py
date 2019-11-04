@@ -29,7 +29,7 @@ class WareHouseAdmin(CreateUpdateAdmin):
 @admin.register(City)
 class CityAdmin(CreateUpdateAdmin):
     list_display = ("id", "name", "state")
-    list_filter = ["state__name"]
+    list_filter = ["state__name", "name"]
     search_fields = ("name", "state__name")
 
 

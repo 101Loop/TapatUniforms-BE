@@ -1,7 +1,8 @@
 from drfaddons import generics
 from rest_framework.generics import ListAPIView
-
+from django_filters.rest_framework import DjangoFilterBackend
 from manager.permissions import IsManager
+from .filters import IsManagerFilterBackend
 
 
 class IndentRequestView(generics.OwnerCreateAPIView):
@@ -14,6 +15,7 @@ class IndentRequestView(generics.OwnerCreateAPIView):
 
     permission_classes = (IsManager,)
     queryset = IndentRequest.objects.all()
+    # filter_backends = (DjangoFilterBackend, IsManagerFilterBackend)
     serializer_class = IndentRequestSerializer
 
 
@@ -29,6 +31,7 @@ class IndentView(ListAPIView):
 
     permission_classes = (IsManager,)
     queryset = Indent.objects.all()
+    filter_backends = (DjangoFilterBackend, IsManagerFilterBackend)
     serializer_class = IndentSerializer
 
 

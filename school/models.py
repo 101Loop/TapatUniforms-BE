@@ -23,6 +23,10 @@ class School(CreateUpdateModel):
     def city_name(self):
         return self.city.name
 
+    @property
+    def state_name(self):
+        return self.city.state.name
+
     def __str__(self):
         return self.name
 

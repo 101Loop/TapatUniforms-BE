@@ -3,16 +3,16 @@ from django.db.models import Sum
 from django.utils.text import gettext_lazy as _
 from drfaddons.models import CreateUpdateModel
 from location.models import WareHouse
+from product.models import Product
+from outlet.models import Outlet
 
 
 class IndentRequest(CreateUpdateModel):
-    from product.models import Product
-    from school.models import School
 
     product = models.ForeignKey(to=Product, on_delete=models.PROTECT)
     quantity = models.IntegerField(verbose_name=_("Quantity Required"))
-    school = models.ForeignKey(
-        verbose_name=_("School"), to=School, on_delete=models.PROTECT
+    outlet = models.ForeignKey(
+        verbose_name=_("Outlet"), to=Outlet, on_delete=models.PROTECT, null=True
     )
     requested_on = models.DateTimeField(
         auto_now_add=True, verbose_name=_("Indent Requested On"), null=True
@@ -25,7 +25,8 @@ class IndentRequest(CreateUpdateModel):
     )
 
     def __str__(self):
-        return self.product.name
+        # return self.product.name
+        return "{} - {}".format(self.product.name, self.outlet.short_name)
 
     class Meta:
         verbose_name = _("Indent Request")
@@ -33,7 +34,6 @@ class IndentRequest(CreateUpdateModel):
 
 
 class Indent(CreateUpdateModel):
-    from school.models import School
 
     indent_name = models.ForeignKey(
         to=IndentRequest,
@@ -51,8 +51,8 @@ class Indent(CreateUpdateModel):
         on_delete=models.CASCADE,
         null=True,
     )
-    school = models.ForeignKey(
-        verbose_name=_("School"), to=School, on_delete=models.CASCADE
+    outlet = models.ForeignKey(
+        verbose_name=_("Outlet"), to=Outlet, on_delete=models.CASCADE, null=True
     )
     shipped_on = models.DateTimeField(
         auto_now_add=True, verbose_name=_("Shipped On"), null=False, blank=False

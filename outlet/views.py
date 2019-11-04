@@ -1,6 +1,8 @@
 from rest_framework import generics
+from django_filters.rest_framework import DjangoFilterBackend
 
 from manager.permissions import IsManager
+from .filters import IsManagerFilterBackend
 
 
 class OutletView(generics.ListAPIView):
@@ -18,4 +20,5 @@ class OutletProductView(generics.ListAPIView):
 
     permission_classes = (IsManager,)
     queryset = OutletProduct.objects.all()
+    filter_backends = (DjangoFilterBackend, IsManagerFilterBackend)
     serializer_class = OutletProductSerializer
