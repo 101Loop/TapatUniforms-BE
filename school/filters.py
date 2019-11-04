@@ -1,6 +1,4 @@
 from rest_framework import filters
-import django_filters
-from outlet.models import Outlet
 
 
 class IsManagerFilterBackend(filters.BaseFilterBackend):
