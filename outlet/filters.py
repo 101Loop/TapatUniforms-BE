@@ -7,7 +7,7 @@ class IsManagerFilterBackend(filters.BaseFilterBackend):
     """
 
     def filter_queryset(self, request, queryset, view):
-        if queryset.model._meta.model_name == "school":
+        if queryset.model._meta.model_name == "outletproduct":
             return queryset.filter(outlet__manager__user=request.user)
 
         elif queryset.model._meta.model_name == "student":

@@ -1,6 +1,7 @@
 from django.contrib import admin
-from drfaddons.admin import CreateUpdateExcludeInlineAdminMixin, CreateUpdateAdmin
-from location.models import State, City, WareHouse
+from drfaddons.admin import CreateUpdateAdmin, CreateUpdateExcludeInlineAdminMixin
+
+from location.models import City, State, WareHouse
 
 
 class CityInline(CreateUpdateExcludeInlineAdminMixin, admin.StackedInline):
@@ -28,7 +29,7 @@ class WareHouseAdmin(CreateUpdateAdmin):
 @admin.register(City)
 class CityAdmin(CreateUpdateAdmin):
     list_display = ("id", "name", "state")
-    list_filter = ["state__name"]
+    list_filter = ["state__name", "name"]
     search_fields = ("name", "state__name")
 
 

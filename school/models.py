@@ -1,9 +1,9 @@
 from django.db import models
 from django.utils.text import gettext_lazy as _
-from location.models import State, City, WareHouse
 from drfaddons.models import CreateUpdateModel
 
-from TapatUniforms.static_var import GENDER_CHOICES, CLASS_CHOICES, SECTION_CHOICES
+from location.models import City, State, WareHouse
+from TapatUniforms.static_var import CLASS_CHOICES, GENDER_CHOICES, SECTION_CHOICES
 
 
 class School(CreateUpdateModel):
@@ -22,6 +22,10 @@ class School(CreateUpdateModel):
     @property
     def city_name(self):
         return self.city.name
+
+    @property
+    def state_name(self):
+        return self.city.state.name
 
     def __str__(self):
         return self.name

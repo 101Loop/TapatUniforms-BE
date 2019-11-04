@@ -1,12 +1,13 @@
 from django_filters.rest_framework import DjangoFilterBackend
-from .filters import IsManagerFilterBackend
 from drfaddons import generics
-from .models import Student, School
 
 # ToDo: Fix Signature expired Issue
-from rest_framework.generics import RetrieveAPIView, ListCreateAPIView
+from rest_framework.generics import ListCreateAPIView, RetrieveAPIView
 
 from manager.permissions import IsManager
+
+from .filters import IsManagerFilterBackend
+from .models import School, Student
 
 
 class SchoolView(generics.OwnerListAPIView):

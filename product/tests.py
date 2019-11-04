@@ -1,8 +1,8 @@
 from django.test import TestCase
-from rest_framework.test import APIClient
-from .models import CategoryMaster
-from .models import Product
 from drf_user.models import User
+from rest_framework.test import APIClient
+
+from .models import CategoryMaster, Product
 
 
 class Testing(TestCase):

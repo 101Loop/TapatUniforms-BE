@@ -7,11 +7,11 @@ class IsManagerFilterBackend(filters.BaseFilterBackend):
     """
 
     def filter_queryset(self, request, queryset, view):
-        if queryset.model._meta.model_name == "school":
+        if queryset.model._meta.model_name == "indentrequest":
             return queryset.filter(outlet__manager__user=request.user)
 
-        elif queryset.model._meta.model_name == "student":
-            return queryset.filter(school__outlet__manager__user=request.user)
+        elif queryset.model._meta.model_name == "indent":
+            return queryset.filter(outlet__manager__user=request.user)
 
         else:
             raise ValueError("Unsupported model applied in filter.")
