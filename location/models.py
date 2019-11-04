@@ -1,7 +1,7 @@
-from django.db import models
-from drfaddons.models import CreateUpdateModel
-from django.utils.text import gettext_lazy as _
 from django.core.exceptions import ValidationError
+from django.db import models
+from django.utils.text import gettext_lazy as _
+from drfaddons.models import CreateUpdateModel
 
 
 class State(CreateUpdateModel):

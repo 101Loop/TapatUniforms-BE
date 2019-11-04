@@ -1,7 +1,7 @@
 from django.contrib import admin
 from drfaddons.admin import CreateUpdateAdmin, CreateUpdateExcludeInlineAdminMixin
 
-from .models import Order, SubOrder, Transaction, Discount
+from .models import Discount, Order, SubOrder, Transaction
 
 
 class TransactionInline(CreateUpdateExcludeInlineAdminMixin, admin.TabularInline):

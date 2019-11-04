@@ -1,6 +1,7 @@
 from django.contrib import admin
-from drfaddons.admin import CreateUpdateExcludeInlineAdminMixin, CreateUpdateAdmin
-from location.models import State, City, WareHouse
+from drfaddons.admin import CreateUpdateAdmin, CreateUpdateExcludeInlineAdminMixin
+
+from location.models import City, State, WareHouse
 
 
 class CityInline(CreateUpdateExcludeInlineAdminMixin, admin.StackedInline):

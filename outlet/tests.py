@@ -1,9 +1,10 @@
 from django.test import TestCase
-from rest_framework.test import APIClient
-from .models import Outlet
-from .models import OutletProduct
-from product.models import Product, CategoryMaster
 from drf_user.models import User
+from rest_framework.test import APIClient
+
+from product.models import CategoryMaster, Product
+
+from .models import Outlet, OutletProduct
 
 
 class OutletProductTest(TestCase):

@@ -1,7 +1,7 @@
 from django.contrib import admin
 from drfaddons.admin import CreateUpdateAdmin, CreateUpdateExcludeInlineAdminMixin
 
-from .models import IndentRequest, Indent, BoxItem, Box
+from .models import Box, BoxItem, Indent, IndentRequest
 
 
 class BoxItemInline(CreateUpdateExcludeInlineAdminMixin, admin.TabularInline):
