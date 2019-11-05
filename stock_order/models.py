@@ -9,10 +9,10 @@ from outlet.models import Outlet
 
 class IndentRequest(CreateUpdateModel):
 
-    product = models.ForeignKey(to=Product, on_delete=models.PROTECT)
+    product = models.ForeignKey(to=Product, on_delete=models.CASCADE)
     quantity = models.IntegerField(verbose_name=_("Quantity Required"))
     outlet = models.ForeignKey(
-        verbose_name=_("Outlet"), to=Outlet, on_delete=models.PROTECT, null=True
+        verbose_name=_("Outlet"), to=Outlet, on_delete=models.CASCADE, null=True
     )
     requested_on = models.DateTimeField(
         auto_now_add=True, verbose_name=_("Indent Requested On"), null=True
@@ -88,7 +88,7 @@ class Box(CreateUpdateModel):
     box_code = models.CharField(verbose_name=_("Box code"), max_length=10)
     female_items = models.IntegerField(verbose_name=_("Number of female " "Items"))
     male_items = models.IntegerField(verbose_name=_("Number of Male Items"))
-    indent = models.ForeignKey(to=Indent, on_delete=models.PROTECT)
+    indent = models.ForeignKey(to=Indent, on_delete=models.CASCADE)
 
     @property
     def total_item(self):
@@ -105,10 +105,10 @@ class Box(CreateUpdateModel):
 class BoxItem(CreateUpdateModel):
     from outlet.models import OutletSubProduct
 
-    product = models.ForeignKey(to=OutletSubProduct, on_delete=models.PROTECT)
+    product = models.ForeignKey(to=OutletSubProduct, on_delete=models.CASCADE)
     num_of_item = models.IntegerField(verbose_name=_("Quantity"))
     item_scanned = models.IntegerField(verbose_name=_("Item Scanned"), default=0)
-    box = models.ForeignKey(to=Box, on_delete=models.PROTECT)
+    box = models.ForeignKey(to=Box, on_delete=models.CASCADE)
 
     def __str__(self):
         return str(self.product)
