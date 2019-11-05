@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+   <style>
+       body{
+
+           font-size: 8px;
+       }
+
+       .invoice{
+
+           max-width: 90%;
+           background-color: #808080;
+           margin: 0px auto;
+           padding: 5px 5px;
+           line-height:1px !important;
+           font-size:10px;
+       }
+
+       h3{
+
+           margin: 0px;
+           font-size: 17px;
+       }
+
+       p{
+
+           margin: 0px;
+           font-size: 14px;
+       }
+
+       .text-right{
+
+           text-align: right;
+       }
+
+       .mrgin-top{
+
+           margin-top: 30px;
+       }
+
+       table{
+
+           width: 100%;
+           text-align: left;
+       }
+
+      .table,.th,.td{
+
+           border:1px solid black;
+           border-collapse: collapse;
+           text-align: center;
+       }
+
+       table.top td,table.top td p,table.top td h3{
+
+           padding: 0px !important;
+           margin: 0px !important;
+           background: #ff0000;
+       }
+
+   </style>
+</head>
+<body>
+<div class="invoice" style="background: #ff0000;">
+   <table class="top">
+
+       <tr>
+           <td class="text-right">
+                <h3 style="padding: 0px;">Tax Invoice (Original for Recipient) </h3>
+           </td>
+       </tr>
+
+       <tr>
+           <td>
+                <h3 style="padding: 0px" style="width: 500px">Sold By:</h3>
+                <p style="padding: 0px;"> {{ sold_by }}</p>
+                <p style="padding: 0px;"> {{ sold_by_address }}</p>
+                <h4 style="padding: 0px;">PAN No: {{ vendor_pan }}</h4>
+                <h4 style="padding: 0px;">GST Registration No: {{ vendor_gst }}</h4>
+
+           </td>
+
+           <td class="text-right" style="width: 500px">
+                <h3 style="padding: 0px;">Billing Address:</h3>
+                <p style="padding: 0px; padding-top: 5px;">{{ customer_name }}</p>
+                <p style="padding: 0px; padding-top: 5px;">+91 {{ customer_mobile }}</p>
+                <p style="padding: 0px; padding-top: 5px;"> IN </p>
+
+           </td>
+       </tr>
+
+       <tr>
+            <td>
+                 <h3 style="padding: 0px;">Order Number: <span style="font-size:14px; font-weight:normal">{{ order_number }}</span></h3>
+                 <h3 style="padding: 0px;">Order Date: <span style="font-size:14px; font-weight:normal">
+                            {{ order_date }}</span></h3>
+
+            </td>
+
+            <td class="text-right">
+                 <h3 style="padding: 0px;">Invoice Number : <span style="font-size:14px; font-weight:normal">
+                        {{ invoice_number }}</span></h3>
+
+                 <h3 style="padding-bottom: 10px;">Invoice Date : <span style="font-size:14px; font-weight:normal">
+                        {{ invoice_date }}</span></h3>
+
+            </td>
+       </tr>
+
+   </table>
+
+           <table class="table mrgin-bottom"  border="2" cellpadding="2" cellspacing="2" style="padding: 5px;">
+                    <tr>
+
+                     <th class="th">S. No</th>
+                     <th class="th">Description</th>
+                     <th class="th">Unit Price </th>
+                     <th class="th">Qty </th>
+                     <th class="th">Discount </th>
+                     <th class="th">Net amount </th>
+                     <th class="th">Total Amount </th>
+                     <th class="th">Grand Total</th>
+                    </tr>
+
+                    <tr>
+
+                        <td class="td">1</td>
+                        <td class="td" style="text-align: center;">{{ product_name }}</td>
+                        <td class="td"> <img src="order/templates/images/rupee.png" alt="rs" width="15" height="15">
+                            {{ price }} </td>
+                        <td class="td"> {{ quantity }} </td>
+                        <td class="td"> <img src="order/templates/images/rupee.png" alt="rs" width="15" height="15">
+                            {{ discount }}</td>
+                        <td class="td"> <img src="order/templates/images/rupee.png" alt="rs" width="15" height="15">
+                            {{ total }}</td>
+                        <td class="td"> <img src="order/templates/images/rupee.png" alt="rs" width="15" height="15">
+                            {{ total }}</td>
+                    </tr>
+
+                    <tr style="padding: 0px;">
+
+                         <td class="td" colspan="7" style="font-size: 15px;">Total:</td>
+                         <td class="td"> <img src="order/templates/images/rupee.png" alt="rs" width="15" height="15">
+                             {{ grand_total }}</td>
+                    </tr>
+
+                    <tr>
+                         <td class="td" colspan="9" style="text-align: left; padding: 0px;">
+
+                                <h3>Amount in words: <span style="font-size:14px; font-weight:normal">
+                                    {{ ammount_in_words }} only</span></h3>
+                         </td>
+
+                    </tr>
+                    <tr style="padding: 0px;">
+
+                         <td class="td" colspan="9" class="text-right" style="text-align: right; padding-right: 0px;">
+
+                                 <div style="padding: 10px;">
+                                 <img src="media/{{ signature_image }}" alt="signature image" width="100" height="50">
+                                 </div>
+                                 <h3>Authorised Signature</h3>
+                         </td>
+                    </tr>
+
+           </table>
+
+</div>
+</body>
+</html>
