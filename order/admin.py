@@ -20,6 +20,15 @@ class OrderAdmin(CreateUpdateAdmin):
     list_filter = ("name", "mobile", "email")
     search_fields = ("name", "mobile")
 
+    def has_add_permission(self, request):
+        return False
+
+    def has_change_permission(self, request, obj=None):
+        return False
+
+    def has_delete_permission(self, request, obj=None):
+        return False
+
 
 @admin.register(Discount)
 class DiscountAdmin(CreateUpdateAdmin):
