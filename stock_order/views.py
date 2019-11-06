@@ -50,7 +50,7 @@ class BoxView(ListAPIView):
     serializer_class = BoxSerializer
 
     def get(self, request, *args, **kwargs):
-        self.queryset = self.get_queryset().filter(pk=self.kwargs["pk"])
+        self.queryset = self.get_queryset().filter(indent=self.kwargs["indent"])
         return super().get(request, *args, **kwargs)
 
 

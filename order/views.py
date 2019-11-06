@@ -1,6 +1,9 @@
 from drfaddons import generics
 
 from manager.permissions import IsManager
+from .models import SubOrder
+from django.http import HttpResponse
+from TapatUniforms.utils import render_to_pdf
 
 
 class OrderView(generics.OwnerCreateAPIView):
@@ -13,7 +16,7 @@ class OrderView(generics.OwnerCreateAPIView):
 
 
 class SubOrderView(generics.OwnerCreateAPIView):
-    from .models import SubOrder
+
     from .serializers import SubOrderSerializer
 
     permission_classes = (IsManager,)
@@ -37,3 +40,20 @@ class DiscountView(generics.OwnerListAPIView):
     permission_classes = (IsManager,)
     queryset = Discount.objects.all()
     serializer_class = DiscountSerializer
+
+
+def invoice(self, request, *args, **kwargs):
+    instance: SubOrder = self.get_object()
+    data = {
+        "order_id": str(instance.order_id),
+        "order_date": str(instance.order.create_date.date().strftime("%d %b %Y")),
+        "name": str(instance.order.name),
+        "email": str(instance.order.email),
+        "mobile": str(instance.order.email),
+        "product": str(instance.product.name),
+        "price": str(instance.price),
+        "qty": str(instance.quantity),
+        "total": str(instance.order.total),
+    }
+    pdf = render_to_pdf("order/invoice.html", data)
+    return HttpResponse(pdf, content_type="application/pdf")

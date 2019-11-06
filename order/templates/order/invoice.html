@@ -111,9 +111,8 @@
                             </td>
 
                             <td>
-                                Invoice #: 123<br>
+                                Order Numer {{ order.order_id }}<br>
                                 Created: January 1, 2015<br>
-                                Due: February 1, 2015
                             </td>
                         </tr>
                     </table>
@@ -125,38 +124,17 @@
                     <table>
                         <tr>
                             <td>
-                                Sparksuite, Inc.<br>
-                                12345 Sunny Road<br>
-                                Sunnyville, CA 12345
+                                {{ outlet.name }}<br>
+                                {{ outlet.address }}<br>
                             </td>
 
                             <td>
-                                Acme Corp.<br>
-                                John Doe<br>
-                                john@example.com
+                                {{ student.name}}<br>
+                                {{ student.id }}<br>
+                                {{ email }}
                             </td>
                         </tr>
                     </table>
-                </td>
-            </tr>
-
-            <tr class="heading">
-                <td>
-                    Payment Method
-                </td>
-
-                <td>
-                    Check #
-                </td>
-            </tr>
-
-            <tr class="details">
-                <td>
-                    Check
-                </td>
-
-                <td>
-                    1000
                 </td>
             </tr>
 
@@ -169,7 +147,8 @@
                     Price
                 </td>
             </tr>
-
+            <tr class="item">
+            {% for item in order.items.all %}
             <tr class="item">
                 <td>
                     Website design
@@ -189,15 +168,7 @@
                     $75.00
                 </td>
             </tr>
-
-            <tr class="item last">
-                <td>
-                    Domain name (1 year)
-                </td>
-
-                <td>
-                    $10.00
-                </td>
+            {% endfor %}
             </tr>
 
             <tr class="total">
