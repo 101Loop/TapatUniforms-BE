@@ -3,6 +3,8 @@ from django_filters.rest_framework import DjangoFilterBackend
 
 from .permissions import IsManager
 from .filters import IsManagerFilterBackend
+from .models import OutletProduct, OutletSubProduct
+from .serializers import OutletProductSerializer, ManageSubProductSerializer
 
 
 class OutletView(generics.ListAPIView):
@@ -16,10 +18,14 @@ class OutletView(generics.ListAPIView):
 
 
 class OutletProductView(generics.ListAPIView):
-    from .models import OutletProduct
-    from .serializers import OutletProductSerializer
 
     permission_classes = (IsManager,)
     queryset = OutletProduct.objects.all()
     filter_backends = (DjangoFilterBackend, IsManagerFilterBackend)
     serializer_class = OutletProductSerializer
+
+
+class ManageStockAPIView(generics.RetrieveUpdateAPIView):
+    queryset = OutletSubProduct.objects.all()
+    filter_backends = (DjangoFilterBackend, IsManagerFilterBackend)
+    serializer_class = ManageSubProductSerializer

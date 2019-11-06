@@ -52,7 +52,7 @@ class Order(CreateUpdateModel):
         return total
 
     @property
-    def orderid(self):
+    def order_id(self):
         return "#OID" + "{}".format(self.id)
 
     def __str__(self):

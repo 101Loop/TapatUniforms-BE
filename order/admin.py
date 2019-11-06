@@ -16,9 +16,10 @@ class SubOrderInline(CreateUpdateExcludeInlineAdminMixin, admin.TabularInline):
 
 class OrderAdmin(CreateUpdateAdmin):
     inlines = [SubOrderInline, TransactionInline]
-    list_display = ("name", "mobile", "email", "discount", "outlet")
+    list_display = ("order_id", "name", "mobile", "email", "discount", "outlet")
     list_filter = ("name", "mobile", "email")
     search_fields = ("name", "mobile")
+    ordering = ["id"]
 
     def has_add_permission(self, request):
         return False

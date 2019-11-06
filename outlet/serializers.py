@@ -33,7 +33,22 @@ class OutletSubProductSerializer(serializers.ModelSerializer):
         from .models import OutletSubProduct
 
         model = OutletSubProduct
-        fields = ("outlet_product", "size", "price", "warehouse_stock", "display_stock")
+        fields = (
+            "id",
+            "outlet_product",
+            "size",
+            "price",
+            "warehouse_stock",
+            "display_stock",
+        )
+
+
+class ManageSubProductSerializer(serializers.ModelSerializer):
+    class Meta:
+        from .models import OutletSubProduct
+
+        model = OutletSubProduct
+        fields = ("id", "warehouse_stock", "display_stock")
 
 
 class OutletProductSerializer(serializers.ModelSerializer):
