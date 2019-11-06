@@ -1,175 +1,213 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-   <style>
-       body{
+    <meta charset="utf-8">
+    <title>A simple, clean, and responsive HTML invoice template</title>
 
-           font-size: 8px;
-       }
+    <style>
+    .invoice-box {
+        max-width: 800px;
+        margin: auto;
+        padding: 30px;
+        border: 1px solid #eee;
+        box-shadow: 0 0 10px rgba(0, 0, 0, .15);
+        font-size: 16px;
+        line-height: 24px;
+        font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
+        color: #555;
+    }
 
-       .invoice{
+    .invoice-box table {
+        width: 100%;
+        line-height: inherit;
+        text-align: left;
+    }
 
-           max-width: 90%;
-           background-color: #808080;
-           margin: 0px auto;
-           padding: 5px 5px;
-           line-height:1px !important;
-           font-size:10px;
-       }
+    .invoice-box table td {
+        padding: 5px;
+        vertical-align: top;
+    }
 
-       h3{
+    .invoice-box table tr td:nth-child(2) {
+        text-align: right;
+    }
 
-           margin: 0px;
-           font-size: 17px;
-       }
+    .invoice-box table tr.top table td {
+        padding-bottom: 20px;
+    }
 
-       p{
+    .invoice-box table tr.top table td.title {
+        font-size: 45px;
+        line-height: 45px;
+        color: #333;
+    }
 
-           margin: 0px;
-           font-size: 14px;
-       }
+    .invoice-box table tr.information table td {
+        padding-bottom: 40px;
+    }
 
-       .text-right{
+    .invoice-box table tr.heading td {
+        background: #eee;
+        border-bottom: 1px solid #ddd;
+        font-weight: bold;
+    }
 
-           text-align: right;
-       }
+    .invoice-box table tr.details td {
+        padding-bottom: 20px;
+    }
 
-       .mrgin-top{
+    .invoice-box table tr.item td{
+        border-bottom: 1px solid #eee;
+    }
 
-           margin-top: 30px;
-       }
+    .invoice-box table tr.item.last td {
+        border-bottom: none;
+    }
 
-       table{
+    .invoice-box table tr.total td:nth-child(2) {
+        border-top: 2px solid #eee;
+        font-weight: bold;
+    }
 
-           width: 100%;
-           text-align: left;
-       }
+    @media only screen and (max-width: 600px) {
+        .invoice-box table tr.top table td {
+            width: 100%;
+            display: block;
+            text-align: center;
+        }
 
-      .table,.th,.td{
+        .invoice-box table tr.information table td {
+            width: 100%;
+            display: block;
+            text-align: center;
+        }
+    }
 
-           border:1px solid black;
-           border-collapse: collapse;
-           text-align: center;
-       }
+    /** RTL **/
+    .rtl {
+        direction: rtl;
+        font-family: Tahoma, 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
+    }
 
-       table.top td,table.top td p,table.top td h3{
+    .rtl table {
+        text-align: right;
+    }
 
-           padding: 0px !important;
-           margin: 0px !important;
-           background: #ff0000;
-       }
-
-   </style>
+    .rtl table tr td:nth-child(2) {
+        text-align: left;
+    }
+    </style>
 </head>
+
 <body>
-<div class="invoice" style="background: #ff0000;">
-   <table class="top">
+    <div class="invoice-box">
+        <table cellpadding="0" cellspacing="0">
+            <tr class="top">
+                <td colspan="2">
+                    <table>
+                        <tr>
+                            <td class="title">
+                                <img src="https://www.sparksuite.com/images/logo.png" style="width:100%; max-width:300px;">
+                            </td>
 
-       <tr>
-           <td class="text-right">
-                <h3 style="padding: 0px;">Tax Invoice (Original for Recipient) </h3>
-           </td>
-       </tr>
+                            <td>
+                                Invoice #: 123<br>
+                                Created: January 1, 2015<br>
+                                Due: February 1, 2015
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
 
-       <tr>
-           <td>
-                <h3 style="padding: 0px" style="width: 500px">Sold By:</h3>
-                <p style="padding: 0px;"> {{ sold_by }}</p>
-                <p style="padding: 0px;"> {{ sold_by_address }}</p>
-                <h4 style="padding: 0px;">PAN No: {{ vendor_pan }}</h4>
-                <h4 style="padding: 0px;">GST Registration No: {{ vendor_gst }}</h4>
+            <tr class="information">
+                <td colspan="2">
+                    <table>
+                        <tr>
+                            <td>
+                                Sparksuite, Inc.<br>
+                                12345 Sunny Road<br>
+                                Sunnyville, CA 12345
+                            </td>
 
-           </td>
+                            <td>
+                                Acme Corp.<br>
+                                John Doe<br>
+                                john@example.com
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
 
-           <td class="text-right" style="width: 500px">
-                <h3 style="padding: 0px;">Billing Address:</h3>
-                <p style="padding: 0px; padding-top: 5px;">{{ customer_name }}</p>
-                <p style="padding: 0px; padding-top: 5px;">+91 {{ customer_mobile }}</p>
-                <p style="padding: 0px; padding-top: 5px;"> IN </p>
+            <tr class="heading">
+                <td>
+                    Payment Method
+                </td>
 
-           </td>
-       </tr>
+                <td>
+                    Check #
+                </td>
+            </tr>
 
-       <tr>
-            <td>
-                 <h3 style="padding: 0px;">Order Number: <span style="font-size:14px; font-weight:normal">{{ order_number }}</span></h3>
-                 <h3 style="padding: 0px;">Order Date: <span style="font-size:14px; font-weight:normal">
-                            {{ order_date }}</span></h3>
+            <tr class="details">
+                <td>
+                    Check
+                </td>
 
-            </td>
+                <td>
+                    1000
+                </td>
+            </tr>
 
-            <td class="text-right">
-                 <h3 style="padding: 0px;">Invoice Number : <span style="font-size:14px; font-weight:normal">
-                        {{ invoice_number }}</span></h3>
+            <tr class="heading">
+                <td>
+                    Item
+                </td>
 
-                 <h3 style="padding-bottom: 10px;">Invoice Date : <span style="font-size:14px; font-weight:normal">
-                        {{ invoice_date }}</span></h3>
+                <td>
+                    Price
+                </td>
+            </tr>
 
-            </td>
-       </tr>
+            <tr class="item">
+                <td>
+                    Website design
+                </td>
 
-   </table>
+                <td>
+                    $300.00
+                </td>
+            </tr>
 
-           <table class="table mrgin-bottom"  border="2" cellpadding="2" cellspacing="2" style="padding: 5px;">
-                    <tr>
+            <tr class="item">
+                <td>
+                    Hosting (3 months)
+                </td>
 
-                     <th class="th">S. No</th>
-                     <th class="th">Description</th>
-                     <th class="th">Unit Price </th>
-                     <th class="th">Qty </th>
-                     <th class="th">Discount </th>
-                     <th class="th">Net amount </th>
-                     <th class="th">Total Amount </th>
-                     <th class="th">Grand Total</th>
-                    </tr>
+                <td>
+                    $75.00
+                </td>
+            </tr>
 
-                    <tr>
+            <tr class="item last">
+                <td>
+                    Domain name (1 year)
+                </td>
 
-                        <td class="td">1</td>
-                        <td class="td" style="text-align: center;">{{ product_name }}</td>
-                        <td class="td"> <img src="order/templates/images/rupee.png" alt="rs" width="15" height="15">
-                            {{ price }} </td>
-                        <td class="td"> {{ quantity }} </td>
-                        <td class="td"> <img src="order/templates/images/rupee.png" alt="rs" width="15" height="15">
-                            {{ discount }}</td>
-                        <td class="td"> <img src="order/templates/images/rupee.png" alt="rs" width="15" height="15">
-                            {{ total }}</td>
-                        <td class="td"> <img src="order/templates/images/rupee.png" alt="rs" width="15" height="15">
-                            {{ total }}</td>
-                    </tr>
+                <td>
+                    $10.00
+                </td>
+            </tr>
 
-                    <tr style="padding: 0px;">
+            <tr class="total">
+                <td></td>
 
-                         <td class="td" colspan="7" style="font-size: 15px;">Total:</td>
-                         <td class="td"> <img src="order/templates/images/rupee.png" alt="rs" width="15" height="15">
-                             {{ grand_total }}</td>
-                    </tr>
-
-                    <tr>
-                         <td class="td" colspan="9" style="text-align: left; padding: 0px;">
-
-                                <h3>Amount in words: <span style="font-size:14px; font-weight:normal">
-                                    {{ ammount_in_words }} only</span></h3>
-                         </td>
-
-                    </tr>
-                    <tr style="padding: 0px;">
-
-                         <td class="td" colspan="9" class="text-right" style="text-align: right; padding-right: 0px;">
-
-                                 <div style="padding: 10px;">
-                                 <img src="media/{{ signature_image }}" alt="signature image" width="100" height="50">
-                                 </div>
-                                 <h3>Authorised Signature</h3>
-                         </td>
-                    </tr>
-
-           </table>
-
-</div>
+                <td>
+                   Total: $385.00
+                </td>
+            </tr>
+        </table>
+    </div>
 </body>
 </html>

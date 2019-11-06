@@ -6,7 +6,7 @@ class OrderSerializer(serializers.ModelSerializer):
         from .models import Order
 
         model = Order
-        fields = ("id", "name", "mobile", "email", "discount", "outlet", "orderid")
+        fields = ("id", "name", "mobile", "email", "discount", "outlet", "order_id")
 
 
 class SubOrderSerializer(serializers.ModelSerializer):
