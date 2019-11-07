@@ -1,6 +1,14 @@
 from rest_framework import serializers
 
 
+class SubOrderSerializer(serializers.ModelSerializer):
+    class Meta:
+        from .models import SubOrder
+
+        model = SubOrder
+        fields = ("order", "product", "price", "quantity", "total")
+
+
 class OrderSerializer(serializers.ModelSerializer):
     class Meta:
         from .models import Order
@@ -9,12 +17,23 @@ class OrderSerializer(serializers.ModelSerializer):
         fields = ("id", "name", "mobile", "email", "discount", "outlet", "order_id")
 
 
-class SubOrderSerializer(serializers.ModelSerializer):
-    class Meta:
-        from .models import SubOrder
+class AllOrderSerializer(serializers.ModelSerializer):
+    suborder_set = SubOrderSerializer(many=True)
 
-        model = SubOrder
-        fields = ("order", "product", "price", "quantity", "total")
+    class Meta:
+        from .models import Order
+
+        model = Order
+        fields = (
+            "id",
+            "name",
+            "mobile",
+            "email",
+            "discount",
+            "outlet",
+            "order_id",
+            "suborder_set",
+        )
 
 
 class TransactionSerializer(serializers.ModelSerializer):

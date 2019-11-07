@@ -26,7 +26,7 @@
       </tr>
     </thead>
     <tbody>
-      {% for item in order.objects.all %}
+      {% for item in suborder.objects.all %}
         <tr class="row{% cycle "1" "2" %}">
           <td>{{ item.product.name }}</td>
           <td class="num">${{ item.price }}</td>

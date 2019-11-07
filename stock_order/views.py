@@ -1,5 +1,5 @@
 from drfaddons import generics
-from rest_framework.generics import ListAPIView
+from rest_framework.generics import ListAPIView, RetrieveUpdateAPIView
 from django_filters.rest_framework import DjangoFilterBackend
 from manager.permissions import IsManager
 from .filters import IsManagerFilterBackend
@@ -67,7 +67,22 @@ class BoxItemView(ListAPIView):
     permission_classes = (IsManager,)
     queryset = BoxItem.objects.all()
     serializer_class = BoxItemSerializer
+    filter_backends = (DjangoFilterBackend, IsManagerFilterBackend)
 
     def get(self, request, *args, **kwargs):
         self.queryset = self.get_queryset().filter(box=self.kwargs["box"])
         return super().get(request, *args, **kwargs)
+
+
+class BoxItemUpdateView(RetrieveUpdateAPIView):
+    """
+    This will update the items available inside the box
+    """
+
+    from .models import BoxItem
+    from .serializers import BoxItemSerializer
+
+    permission_classes = (IsManager,)
+    queryset = BoxItem.objects.all()
+    serializer_class = BoxItemSerializer
+    filter_backends = (DjangoFilterBackend, IsManagerFilterBackend)

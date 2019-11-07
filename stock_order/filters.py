@@ -11,7 +11,12 @@ class IsManagerFilterBackend(filters.BaseFilterBackend):
             return queryset.filter(outlet__manager__user=request.user)
 
         elif queryset.model._meta.model_name == "indent":
-            return queryset.filter(outlet__manager__user=request.user)
+            return queryset.filter(indent_name__outlet__manager__user=request.user)
+
+        elif queryset.model._meta.model_name == "boxitem":
+            return queryset.filter(
+                product__outlet_product__outlet__manager__user=request.user
+            )
 
         else:
             raise ValueError("Unsupported model applied in filter.")

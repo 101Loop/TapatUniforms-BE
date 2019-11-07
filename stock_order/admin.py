@@ -7,6 +7,7 @@ from .models import Box, BoxItem, Indent, IndentRequest
 class BoxItemInline(CreateUpdateExcludeInlineAdminMixin, admin.TabularInline):
     extra = 0
     model = BoxItem
+    readonly_fields = ("item_scanned", "warehouse_stock")
 
 
 class BoxItemAdmin(CreateUpdateAdmin):
@@ -15,7 +16,7 @@ class BoxItemAdmin(CreateUpdateAdmin):
 
 class IndentAdmin(CreateUpdateAdmin):
     list_display = ("indent_name", "price", "warehouse_name", "shipped_on")
-    list_filter = ("indent_name", "outlet")
+    list_filter = ("indent_name",)
 
 
 @admin.register(IndentRequest)
