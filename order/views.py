@@ -1,10 +1,6 @@
-from django.http import HttpResponse
-from django.shortcuts import get_object_or_404
-from django.template.loader import render_to_string
 from drfaddons import generics
 from rest_framework.generics import ListCreateAPIView
 from manager.permissions import IsManager
-import weasyprint
 from .models import SubOrder
 
 
@@ -69,15 +65,3 @@ class DiscountView(ListCreateAPIView):
 #     }
 #     pdf = render_to_pdf("order/invoice.html", data)
 #     return HttpResponse(pdf, content_type="application/pdf")
-
-
-def admin_order_pdf(request, order_id):
-    order = get_object_or_404(SubOrder, id=order_id)
-
-    html = render_to_string("order/example.html", {"order": order})
-    response = HttpResponse(content_type="application/pdf")
-    response["Content-Disposition"] = "filename='order_{}.pdf'".format(order.id)
-    weasyprint.HTML(string=html).write_pdf(
-        response, stylesheets=[weasyprint.CSS(settings.STATIC_ROOT + "css/pdf.css")]
-    )
-    return response
