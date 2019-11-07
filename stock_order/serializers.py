@@ -4,7 +4,7 @@ from rest_framework import serializers
 class IndentSerializer(serializers.ModelSerializer):
     from outlet.serializers import OutletSerializer
 
-    outlet = OutletSerializer(many=False)
+    # outlet = OutletSerializer(many=False)
 
     class Meta:
         from .models import Indent
@@ -17,7 +17,6 @@ class IndentSerializer(serializers.ModelSerializer):
             "num_of_boxes",
             "num_of_items",
             "warehouse_name",
-            "outlet",
         )
 
 
@@ -54,4 +53,11 @@ class BoxItemSerializer(serializers.ModelSerializer):
         from .models import BoxItem
 
         model = BoxItem
-        fields = ("id", "product", "num_of_item", "item_scanned", "box")
+        fields = (
+            "id",
+            "product",
+            "num_of_item",
+            "item_scanned",
+            "warehouse_stock",
+            "box",
+        )

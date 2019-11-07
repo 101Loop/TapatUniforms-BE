@@ -51,9 +51,9 @@ class Indent(CreateUpdateModel):
         on_delete=models.CASCADE,
         null=True,
     )
-    outlet = models.ForeignKey(
-        verbose_name=_("Outlet"), to=Outlet, on_delete=models.CASCADE, null=True
-    )
+    # outlet = models.ForeignKey(
+    #     verbose_name=_("Outlet"), to=Outlet, on_delete=models.CASCADE, null=True
+    # )
     shipped_on = models.DateTimeField(
         auto_now_add=True, verbose_name=_("Shipped On"), null=False, blank=False
     )
@@ -108,6 +108,7 @@ class BoxItem(CreateUpdateModel):
     product = models.ForeignKey(to=OutletSubProduct, on_delete=models.CASCADE)
     num_of_item = models.IntegerField(verbose_name=_("Quantity"))
     item_scanned = models.IntegerField(verbose_name=_("Item Scanned"), default=0)
+    warehouse_stock = models.PositiveIntegerField(default=0)
     box = models.ForeignKey(to=Box, on_delete=models.CASCADE)
 
     def __str__(self):
