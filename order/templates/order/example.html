@@ -2,7 +2,7 @@
 <body>
   <h1>My Shop</h1>
   <p>
-    Invoice no. {{ order_id }} </br>
+    Invoice no. {{ suborder.order.order_id }} </br>
     <span class="secondary">
       {{ order_date }}
     </span>
@@ -10,9 +10,9 @@
 
   <h3>Bill to</h3>
   <p>
-    {{ name }}<br>
-    {{ email }}<br>
-    {{ mobile }}<br>
+    {{ suborder.order.name }}<br>
+    {{ suborder.order.email }}<br>
+    {{ suborder.order.mobile }}<br>
   </p>
 
   <h3>Items bought</h3>
@@ -26,23 +26,22 @@
       </tr>
     </thead>
     <tbody>
-      {% for item in suborder.objects.all %}
+      {% for item in suborder.order.suborder_set.all %}
         <tr class="row{% cycle "1" "2" %}">
           <td>{{ item.product.name }}</td>
           <td class="num">${{ item.price }}</td>
           <td class="num">{{ item.quantity }}</td>
-          <td class="num">${{ item.get_cost }}</td>
+          <td class="num">${{ item.total }}</td>
         </tr>
       {% endfor %}
       <tr class="total">
         <td colspan="3">Total</td>
-        <td class="num">${{ order.get_total_cost }}</td>
+        <td class="num">{{ suborder.order.total }}</td>
       </tr>
+    {%  for mode in suborder.order.transaction_set.all %}
+        {{ mode.mode }}
+    {% endfor %}
     </tbody>
   </table>
-
-  <span class="{% order.paid %}">
-    {% order.paid %}Paid
-  </span>
 </body>
 </html>
