@@ -12,4 +12,5 @@ urlpatterns = [
         "transaction/", views.TransactionView.as_view(), name="list-create-transaction"
     ),
     path("discount/", views.DiscountView.as_view(), name="list-discounts"),
+    path("invoice/<int:pk>/", views.OrderPdfDetailView.as_view(), name="order-pdf"),
 ]

@@ -1,7 +1,11 @@
+from django.http import HttpResponse
+from django.views.generic import DetailView, ListView
+from django_xhtml2pdf.utils import generate_pdf
 from drfaddons import generics
 from rest_framework.generics import ListCreateAPIView
 from manager.permissions import IsManager
 from .models import SubOrder
+from TapatUniforms.utils import render_to_pdf
 
 
 class OrderView(generics.OwnerCreateAPIView):
@@ -49,19 +53,26 @@ class DiscountView(ListCreateAPIView):
     def perform_create(self, serializer):
         serializer.save(created_by_id=self.request.user.id)
 
+        
+class PdfResponseMixin(object):
+    pdf_name = "invoice"
 
-# def invoice(self, request, *args, **kwargs):
-#     instance: SubOrder = self.get_object()
-#     data = {
-#         "order_id": str(instance.order_id),
-#         "order_date": str(instance.order.create_date.date().strftime("%d %b %Y")),
-#         "name": str(instance.order.name),
-#         "email": str(instance.order.email),
-#         "mobile": str(instance.order.email),
-#         "product": str(instance.product.name),
-#         "price": str(instance.price),
-#         "qty": str(instance.quantity),
-#         "total": str(instance.order.total),
-#     }
-#     pdf = render_to_pdf("order/invoice.html", data)
-#     return HttpResponse(pdf, content_type="application/pdf")
+    def get_pdf_name(self):
+        return self.pdf_name
+
+    def render_to_response(self, context, **response_kwargs):
+        context = self.get_context_data()
+        template = self.get_template_names()[0]
+        resp = HttpResponse(content_type="application/pdf")
+        resp["Content-Disposition"] = 'attachment; filename="{0}.pdf"'.format(
+            self.get_pdf_name()
+        )
+        result = generate_pdf(template, file_object=resp, context=context)
+        return result
+
+
+class OrderPdfDetailView(PdfResponseMixin, DetailView):
+    template_name = "order/example.html"
+    context_object_name = "suborder"
+    model = SubOrder
+

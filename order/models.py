@@ -85,10 +85,6 @@ class SubOrder(CreateUpdateModel):
     def total(self):
         return self.price * self.quantity
 
-    @property
-    def invoiceid(self):
-        return "#INVOICE" + "{}".format(self.id)
-
     def __str__(self):
         return self.order.name
 
