@@ -53,7 +53,7 @@ class DiscountView(ListCreateAPIView):
     def perform_create(self, serializer):
         serializer.save(created_by_id=self.request.user.id)
 
-
+        
 class PdfResponseMixin(object):
     pdf_name = "invoice"
 
@@ -75,3 +75,4 @@ class OrderPdfDetailView(PdfResponseMixin, DetailView):
     template_name = "order/example.html"
     context_object_name = "suborder"
     model = SubOrder
+
