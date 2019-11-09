@@ -4,7 +4,7 @@ from django_xhtml2pdf.utils import generate_pdf
 from drfaddons import generics
 from rest_framework.generics import ListCreateAPIView
 from manager.permissions import IsManager
-from .models import SubOrder
+from .models import SubOrder, Order
 
 
 class OrderView(generics.OwnerCreateAPIView):
@@ -72,5 +72,5 @@ class PdfResponseMixin(object):
 
 class OrderPdfDetailView(PdfResponseMixin, DetailView):
     template_name = "order/example.html"
-    context_object_name = "suborder"
-    model = SubOrder
+    context_object_name = "order"
+    model = Order

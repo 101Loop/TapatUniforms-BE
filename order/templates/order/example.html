@@ -1,47 +1,49 @@
 <html>
 <body>
-  <h1>My Shop</h1>
+  <h1><strong>Uniparels</strong></h1>
   <p>
-    Invoice no. {{ suborder.order.order_id }} </br>
+    Order no. {{ order.order_id }} </br>
     <span class="secondary">
       {{ order_date }}
     </span>
   </p>
-
   <h3>Bill to</h3>
   <p>
-    {{ suborder.order.name }}<br>
-    {{ suborder.order.email }}<br>
-    {{ suborder.order.mobile }}<br>
+    {{ order.name }}<br>
+    {{ order.email }}<br>
+    {{ order.mobile }}<br>
   </p>
-
+  <h3>Payment Method</h3>
+  <p class="set" style="font-weight: bold">{%  for mode in order.transaction_set.all %}
+        {{ mode.mode }} <br>
+    {% endfor %}</p>
   <h3>Items bought</h3>
-  <table>
+  <table >
     <thead>
       <tr>
-        <th>Product</th>
-        <th>Price</th>
-        <th>Quantity</th>
-        <th>Cost</th>
+        <td><strong>Product</strong></td>
+        <td><strong>Price</strong></td>
+        <td><strong>Quantity</strong></td>
+        <td><strong>Cost</strong></td>
       </tr>
     </thead>
     <tbody>
-      {% for item in suborder.order.suborder_set.all %}
-        <tr class="row{% cycle "1" "2" %}">
-          <td>{{ item.product.name }}</td>
-          <td class="num">${{ item.price }}</td>
-          <td class="num">{{ item.quantity }}</td>
-          <td class="num">${{ item.total }}</td>
-        </tr>
-      {% endfor %}
+        <ul><li>
+          {% for item in order.suborder_set.all %}
+          <tr>
+              <td>{{ item.product.name }}</td>
+              <td class="num">{{ item.price }}</td>
+              <td class="num">{{ item.quantity }}</td>
+              <td class="num">{{ item.total }}</td>
+          </tr>
+
+          {% endfor %}
+        </li></ul>
+      </tbody>
       <tr class="total">
-        <td colspan="3">Total</td>
-        <td class="num">{{ suborder.order.total }}</td>
+        <td class="space" style="padding-top: 15px" colspan="3"><strong>Sub Total</strong></td>
+        <td class="num" style="padding-top: 15px"><strong>{{ order.total }}</strong></td>
       </tr>
-    {%  for mode in suborder.order.transaction_set.all %}
-        {{ mode.mode }}
-    {% endfor %}
-    </tbody>
   </table>
 </body>
 </html>
