@@ -111,7 +111,7 @@
                             </td>
 
                             <td>
-                                Order Numer {{ order.order_id }}<br>
+                                Invoice: {{ suborder.order.order_id }}<br>
                                 Created: January 1, 2015<br>
                             </td>
                         </tr>
@@ -124,14 +124,15 @@
                     <table>
                         <tr>
                             <td>
-                                {{ outlet.name }}<br>
-                                {{ outlet.address }}<br>
+                                Sparksuite, Inc.<br>
+                                12345 Sunny Road<br>
+                                Sunnyville, CA 12345
                             </td>
 
                             <td>
-                                {{ student.name}}<br>
-                                {{ student.id }}<br>
-                                {{ email }}
+                                {{ suborder.order.name }}<br>
+                                {{ suborder.order.email }}<br>
+                                {{ suborder.order.mobile }}
                             </td>
                         </tr>
                     </table>
@@ -140,42 +141,56 @@
 
             <tr class="heading">
                 <td>
-                    Item
+                    Payment Method
                 </td>
 
                 <td>
-                    Price
+
                 </td>
             </tr>
-            <tr class="item">
-            {% for item in order.items.all %}
-            <tr class="item">
+            {%  for mode in suborder.order.transaction_set.all %}
+            <tr class="details">
                 <td>
-                    Website design
-                </td>
-
-                <td>
-                    $300.00
-                </td>
-            </tr>
-
-            <tr class="item">
-                <td>
-                    Hosting (3 months)
-                </td>
-
-                <td>
-                    $75.00
+                    {{ mode.mode }}
                 </td>
             </tr>
             {% endfor %}
+            <tr class="heading">
+                <td>
+                    Item
+                </td>
+                <td>
+                    Price
+                </td>
+                <td>
+                    Quantity
+                </td>
+                <td>
+                    Total
+                </td>
             </tr>
+            {% for item in suborder.order.suborder_set.all %}
+                <tr class="item">
+                    <td>
+                        {{ item.product.name }}
+                    </td>
+                    <td>
+                        {{ item.price }}
+                    </td>
+                    <td>
+                        {{ item.quantity }}
+                    </td>
+                    <td>
+                        {{ item.total }}
+                    </td>
+                </tr>
+            {% endfor %}
 
             <tr class="total">
                 <td></td>
 
                 <td>
-                   Total: $385.00
+                   Total: {{ suborder.order.total }}
                 </td>
             </tr>
         </table>
