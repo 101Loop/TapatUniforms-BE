@@ -41,20 +41,21 @@ class ReadOnlyAdmin(CreateUpdateAdmin):
 
 class TransactionInline(CreateUpdateExcludeInlineAdminMixin, admin.TabularInline):
     model = Transaction
-    extra = 1
+    extra = 0
 
 
 class SubOrderInline(CreateUpdateExcludeInlineAdminMixin, admin.TabularInline):
     model = SubOrder
-    extra = 1
+    extra = 0
 
 
 class OrderAdmin(ReadOnlyAdmin):
     inlines = [SubOrderInline, TransactionInline]
-    list_display = ("order_id", "name", "mobile", "email", "discount", "outlet")
-    list_filter = ("name", "mobile", "email")
-    search_fields = ("name", "mobile")
+    list_display = ("order_id", "outlet", "name", "mobile", "email")
+    list_filter = ("outlet__school__name",)
+    search_fields = ("order_id", "mobile")
     ordering = ["id"]
+    list_per_page = 50
 
 
 @admin.register(Discount)
