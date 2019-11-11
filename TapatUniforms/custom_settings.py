@@ -40,6 +40,7 @@ CUSTOM_APPS = [
     "location",
     "manager",
     "rest_framework.authtoken",
+    "import_export",
 ]
 
 JWT_AUTH = {

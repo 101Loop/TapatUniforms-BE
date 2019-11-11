@@ -119,3 +119,4 @@ static
 # vscode
 .vscode
 /src
+/share # import-export generated folder
