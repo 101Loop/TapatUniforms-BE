@@ -99,7 +99,6 @@ USER_SETTINGS = {
     },
 }
 
-
 # Email
 EMAIL_BACKEND = env("EMAIL_BACKEND")
 EMAIL_HOST = env("EMAIL_HOST")
@@ -112,6 +111,8 @@ DEFAULT_FROM_EMAIL = EMAIL_FROM = env("DEFAULT_FROM_EMAIL")
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
+SENDSMS_BACKEND = "sendsms.backends.console.SmsBackend"
+# SENDSMS_BACKEND = "TapatUniforms.utils.MsgClubBackend"
 
 DATABASES = {
     "default": {
