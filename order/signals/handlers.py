@@ -6,10 +6,9 @@ from drfaddons.utils import send_message
 
 @receiver(post_save, sender=Order)
 def post_order(sender, instance: Order, created, **kwargs):
-    invoice_url = (
-        "https://tapatapi.civilmachines.com/api/order/invoice/"
-        + "{}/".format(instance.id)
-    )
+    INVOICE_URL = "https://tapatapi.civilmachines.com/api/order/invoice/"
+    # INVOICE_URL = "http://192.168.1.247:8000/api/order/invoice/"
+    invoice_url = INVOICE_URL + "{}/".format(instance.id)
     message = (
         "Thank You for ordering from us. Your invoice can be downloaded from "
         + invoice_url
@@ -18,7 +17,7 @@ def post_order(sender, instance: Order, created, **kwargs):
     data = {
         "message": message,
         "subject": subject,
-        "recip": [instance.email],
+        "recip": [instance.mobile],
         "recip_email": [instance.email],
     }
 

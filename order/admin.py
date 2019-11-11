@@ -1,6 +1,7 @@
 from django.contrib import admin
 from drfaddons.admin import CreateUpdateAdmin, CreateUpdateExcludeInlineAdminMixin
-
+from import_export import resources
+from import_export.admin import ImportExportModelAdmin
 from .models import Discount, Order, SubOrder, Transaction
 
 
@@ -39,22 +40,39 @@ class ReadOnlyAdmin(CreateUpdateAdmin):
         return False
 
 
+class OrderResource(resources.ModelResource):
+    class Meta:
+        model = Order
+        fields = (
+            "id",
+            "outlet__school__name",
+            "create_date",
+            "created_by__name",
+            "name",
+            "email",
+        )
+        export_order = ("id", "outlet__school__name", "create_date", "name", "email")
+
+
 class TransactionInline(CreateUpdateExcludeInlineAdminMixin, admin.TabularInline):
     model = Transaction
-    extra = 1
+    extra = 0
 
 
 class SubOrderInline(CreateUpdateExcludeInlineAdminMixin, admin.TabularInline):
     model = SubOrder
-    extra = 1
+    extra = 0
 
 
-class OrderAdmin(ReadOnlyAdmin):
+class OrderAdmin(ReadOnlyAdmin, ImportExportModelAdmin):
     inlines = [SubOrderInline, TransactionInline]
-    list_display = ("order_id", "name", "mobile", "email", "discount", "outlet")
-    list_filter = ("name", "mobile", "email")
-    search_fields = ("name", "mobile")
+    list_display = ("order_id", "outlet", "name", "mobile", "email")
+    list_filter = ("outlet__school__name",)
+    search_fields = ("order_id", "mobile")
     ordering = ["id"]
+    list_per_page = 50
+    resource_class = OrderResource
+    # actions = [export_to_csv]
 
 
 @admin.register(Discount)
