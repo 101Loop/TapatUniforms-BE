@@ -31,7 +31,7 @@ class OutletProduct(CreateUpdateModel):
     product = models.ForeignKey(
         to=Product, verbose_name=_("Product"), on_delete=models.PROTECT
     )
-    image = models.ImageField(verbose_name=_("Image"))
+    image = models.ImageField(verbose_name=_("Image"), null=True, blank=True)
     color = models.CharField(
         verbose_name=_("Color"), max_length=254, default=_("white")
     )

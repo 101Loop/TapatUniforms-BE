@@ -6,7 +6,7 @@ from TapatUniforms.static_var import GENDER_CHOICES, MALE, PRODUCT_TYPE_CHOICES
 
 
 class CategoryMaster(CreateUpdateModel):
-    name = models.CharField(verbose_name=_("Category"), max_length=254)
+    name = models.CharField(verbose_name=_("Category"), max_length=254, unique=True)
     image = models.ImageField(verbose_name=_("Image"), null=True)
 
     def __str__(self):
