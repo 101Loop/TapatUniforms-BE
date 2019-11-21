@@ -27,7 +27,7 @@ sentry_sdk.init(
 # os.environ
 SECRET_KEY = env("SECRET_KEY")
 
-ALLOWED_HOSTS = env.list("ALLOWED_HOSTS")
+ALLOWED_HOSTS = env.list("ALLOWED_HOSTS", [])
 
 CUSTOM_APPS = [
     "drf_user",
